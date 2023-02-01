@@ -1,0 +1,22 @@
+{
+  "name": "digitalleaf",
+  "version": "1.0.0",
+  "description": "digital leaf project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fridaythethirteenth/DigitalLeaf.git"
+  },
+  "author": "sykong yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fridaythethirteenth/DigitalLeaf/issues"
+  },
+  "homepage": "https://github.com/fridaythethirteenth/DigitalLeaf#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
