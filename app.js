@@ -1,10 +1,17 @@
 import express from 'express'
-import {getUsers} from './database.js'
+import {getUsers, getUser} from './database.js'
 
 const app = express()
 
-app.get('/test', (req, res) => {
-    res.send('test')
+app.get('/users', async (req, res) => {
+    let users = await getUsers()
+    res.send(users)
+})
+
+app.get('/users/:id', async (req, res) => {
+    let id = req.params.id
+    let user = await getUser(id)
+    res.status(201).send(user)
 })
 
 app.use((err, req, res, next)=>{
@@ -12,6 +19,6 @@ app.use((err, req, res, next)=>{
     res.status(500).send('Something Broke!')
 })
 
-app.listen(3306, ()=>{
-    console.log('Server is running on port 3306');
+app.listen(8080, ()=>{
+    console.log('Server is running on port 8080');
 })
