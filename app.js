@@ -1,23 +1,24 @@
-import express from 'express'
-import {getUsers, getUser} from './database.js'
+import express, { Router } from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import {getUsers, getUser, checkIdExists} from './database.js'
 
 const app = express()
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-app.get('/users', async (req, res) => {
-    let users = await getUsers()
-    res.send(users)
-})
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/users/:id', async (req, res) => {
-    let id = req.params.id
-    let user = await getUser(id)
-    res.status(201).send(user)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/public/views/index.html'))
 })
 
 app.use((err, req, res, next)=>{
     console.error(err.stack)
     res.status(500).send('Something Broke!')
 })
+
+app.use('/', Router)
 
 app.listen(8080, ()=>{
     console.log('Server is running on port 8080');

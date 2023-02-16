@@ -34,7 +34,8 @@ async function createUser(email, password) {
 
 async function checkIdExists(id) {
     let exists = false
-    let count = await pool.query("SELECT user_id FROM users WHERE user_id = ?", [id])
+    let [count] = await pool.query("SELECT COUNT(*) as count FROM users WHERE user_id = ?", [id])
+    console.log(count[0]["count"]);
 }
 
 function randomId() {
@@ -42,4 +43,4 @@ function randomId() {
     return id
 }
 
-export {getUsers, getUser, createUser}
+export {getUsers, getUser, createUser, checkIdExists}
