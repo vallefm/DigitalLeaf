@@ -25,22 +25,48 @@ async function getUser(id) {
     return result;
 }
 
-async function createUser(email, password) {
-    salt = await bcrypt.genSalt(10)
-    encryptedPass = await bcrypt.hash(password, salt)
+async function createUser(email, password, firstName, lastName) {
+    let salt = await bcrypt.genSalt(10)
+    let encryptedPass = await bcrypt.hash(password, salt)
+    let userId = createUserID()
+
 
     await pool.query("SELECT user_id FROM users WHERE user_id = ?", [id])
 }
 
+function createUserID() {
+    let userId = 'usr'+randomId()
+    while (!checkIdExists(userId)){
+        userId = 'usr'+randomId()
+    }
+    return userId
+}
+
 async function checkIdExists(id) {
     let exists = false
-    let [count] = await pool.query("SELECT COUNT(*) as count FROM users WHERE user_id = ?", [id])
-    console.log(count[0]["count"]);
+    let [countData] = await pool.query("SELECT COUNT(*) as count FROM users WHERE user_id = ?", [id])
+    let count = countData[0]["count"]
+    if (count != 0) {
+        return false;
+    }
+    return true
 }
 
+async function checkEmailExists(email) {
+    let exists = false
+    let [countData] = await pool.query("SELECT COUNT(*) as count FROM users WHERE email = ?", [email])
+    let count = countData[0]["count"]
+    if (count != 0) {
+        return false;
+    }
+    return true
+}
+
+// generic 8-digit random id generator. Prepend relevant 3-letter tag to create complete id (usr for users, tsk for task, etc.) 
 function randomId() {
-    let id = Math.round(Math.random()*100000000)
-    return id
+    let id = Math.round(Math.random()*10000000)
+    return id.toString();
 }
 
+// exports functions for import in other files
 export {getUsers, getUser, createUser, checkIdExists}
