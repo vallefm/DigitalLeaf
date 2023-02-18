@@ -16,6 +16,10 @@ const __dirname = path.dirname(__filename)
 // Load static files
 app.use(express.static(path.join(__dirname, 'public')))
 
+//conver request to json, convert form requests to json
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 // Route handling
 app.use('/login', loginRouter)
 app.use('/signup', signupRouter)
