@@ -33,7 +33,6 @@
     <script>
       $(function () {
         $("#navigation").load("../layout/navbar.html");
-        $("#sidebarMenu").load("../layout/sidebar.html");
       });
     </script>
   </head>
@@ -41,13 +40,11 @@
     <header>
       <!--Sets the class that the sript for the navbar interacts with-->
       <div class="container" id="navigation"></div>
-
     </header>
 
     <main
       class="d-flex flex-grow-1 align-items-start justify-content-left bg-body-secondary"
     >
-    <div class="container" id="sidebarMenu"></div>
       <!--Contains the clickable buttons at the top, will need to turn into a script to add quick actions that the user can set up-->
       <div class="container mt-3">
         <div class="btn-group">
@@ -64,20 +61,49 @@
           <button type="button" class="btn btn-dark" href="#projects">+</button>
         </div>
 
-        <p> </p>
-        <h3>Annoucements</h3>
-        <hr />
-        <h3>Header</h3>
-        <p> here is where the announcements will go</p>
-        <br>
-
-        <h3>Header</h3>
-        <p> here is where the announcements will go</p>
-        <br>
-        <h3>Header</h3>
-        <p> here is where the announcements will go</p>
-        <br>
-
+        <!--Card content-->
+        <div class="=tab-content">
+          <div id="homepage" class="container tab-pane active">
+            <br />
+            <h3>Recent Projects</h3>
+            <p>Insert Cards here for the projects</p>
+            <!--This is a card-->
+            <div class="container mt-3">
+              <div class="card" style="width: 300px">
+                <img
+                  class="card-img-top"
+                  src="../images/stock.jpg"
+                  alt="Card image"
+                  style="width: 100%"
+                />
+                <div class="card-body d-flex flex-column">
+                  <a href="#" class="btn btn-dark"
+                    >Senior Capstone Group Project</a
+                  ><br />
+                  <a href="#" class="btn btn-basic">ICS-499 Group</a>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <!--This is a card-->
+            <div class="container mt-3">
+                <div class="card" style="width: 300px">
+                  <img
+                    class="card-img-top"
+                    src="../images/stock.jpg"
+                    alt="Card image"
+                    style="width: 100%"
+                  />
+                  <div class="card-body d-flex flex-column">
+                    <a href="#" class="btn btn-dark"
+                      >Senior Capstone Group Project</a
+                    ><br />
+                    <a href="#" class="btn btn-basic">ICS-499 Group</a>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
     </main>
   </body>
