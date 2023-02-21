@@ -5,14 +5,15 @@
   </head>
   <body class="vh-100 d-flex flex-column">
     <header>
-      <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName: firstName}) %>
+      <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName:
+      firstName}) %>
     </header>
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
       <section id="announcements" class="container mt-5">
         <%- include('../components/actionbar.ejs') %>
         <h3 class="mt-4">
-          Announcements
+          Project Updates
           <hr />
         </h3>
         <div class="content overflow-y-auto" style="height: 80%;">
@@ -25,6 +26,7 @@
           <%- include('../components/projects/announcement.ejs') %>
         </div>
       </section>
+      <%- include('../components/projects/details_bar.ejs') %>
     </main>
   </body>
 </html>

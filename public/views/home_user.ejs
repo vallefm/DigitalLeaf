@@ -7,45 +7,19 @@
     <header>
       <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName: firstName}) %>
     </header>
-    <main class="d-flex flex-grow-1 bg-body-secondary">
+    <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
-      <!--Contains the clickable buttons at the top, will need to turn into a script to add quick actions that the user can set up-->
-      <div class="container mt-3">
-        <!--Card content-->
-        <%- include('../components/actionbar.ejs') %>
+      <div class="container mt-5 content overflow-y-auto">
+        <h3>Recent Projects</h3>
+        <%- include('../components/projects/project_card.ejs') %>
+        <hr />
 
-        <div id="homepage" class="tab-pane active mt-5">
-          <h3>Recent Projects</h3>
-          <!--This is a card-->
-          <div class="card" style="width: 300px">
-            <img
-              class="card-img-top"
-              src="../images/stock.jpg"
-              alt="Card image"
-              style="width: 100%"
-            />
-            <div class="card-body d-flex flex-column">
-              <a href="#" class="btn btn-dark">Senior Capstone Group Project</a
-              ><br />
-              <a href="#" class="btn btn-basic">ICS-499 Group</a>
-            </div>
-          </div>
-          <hr />
-          <!--This is a card-->
-          <div class="card" style="width: 300px">
-            <img
-              class="card-img-top"
-              src="../images/stock.jpg"
-              alt="Card image"
-              style="width: 100%"
-            />
-            <div class="card-body d-flex flex-column">
-              <a href="#" class="btn btn-dark">Senior Capstone Group Project</a
-              ><br />
-              <a href="#" class="btn btn-basic">ICS-499 Group</a>
-            </div>
-          </div>
-        </div>
+        <h3>My Projects</h3>
+        <%- include('../components/projects/project_card.ejs') %>
+        <hr />
+
+        <h3>Team Projects</h3>
+        <%- include('../components/projects/project_card.ejs') %>
       </div>
     </main>
   </body>
