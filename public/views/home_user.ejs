@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../components/meta.ejs') %>
+  </head>
+  <body class="vh-100 d-flex flex-column">
+    <header><%- include('../components/navbar.ejs') %></header>
+
+    <main class="d-flex flex-grow-1 align-items-start justify-content-left bg-body-secondary">
+      <div class="btn btn-dark">TEST LOGGED IN USER FIRST NAME <%= firstName %></div>
+      <div class="container" id="sidebarMenu"></div>
+      <!--Contains the clickable buttons at the top, will need to turn into a script to add quick actions that the user can set up-->
+      <div class="container mt-3">
+        <div class="btn-group">
+          <button type="button" class="btn btn-dark" href="#projects">
+            Home
+          </button>
+          <button type="button" class="btn btn-dark" href="#projects">
+            Projects
+          </button>
+          <button type="button" class="btn btn-dark" href="#projects">
+            Schedule
+          </button>
+          <!--This button will be the quick action addition-->
+          <button type="button" class="btn btn-dark" href="#projects">+</button>
+        </div>
+
+        <p></p>
+        <h3>Annoucements</h3>
+        <hr />
+        <h3>Header</h3>
+        <p>here is where the announcements will go</p>
+        <br />
+
+        <h3>Header</h3>
+        <p>here is where the announcements will go</p>
+        <br />
+        <h3>Header</h3>
+        <p>here is where the announcements will go</p>
+        <br />
+      </div>
+    </main>
+  </body>
+</html>

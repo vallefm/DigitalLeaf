@@ -2,7 +2,6 @@ import express from 'express'
 import {login} from '../models/authentication.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import e from 'express'
 
 const router = express.Router()
 const __filename = fileURLToPath(import.meta.url)
@@ -19,6 +18,11 @@ router.post('/', async (req, res) => {
     let {email, password} = req.body
     let result = await login(email, password)
     if (result.status) {
+        req.session.user = {}
+        req.session.user.id = result.user.id
+        req.session.user.email = result.user.email
+        req.session.user.firstName = result.user.first_name
+        req.session.user.lastName = result.user.last_name
         res.redirect('/home')
     } else {
         console.log(result.status)
