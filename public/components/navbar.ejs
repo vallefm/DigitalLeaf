@@ -23,7 +23,7 @@
   <div class="collapse navbar-collapse text-center" id="toggleNavMenu">
     <ul class="navbar-nav ms-auto d-flex align-items-center">
       <% if (locals.loggedIn && locals.firstName) {%>
-        <p class="my-auto">Welcome, <%- firstName %></p>
+        <p class="my-auto"><%- firstName %></p>
       <% } else { %>
       <li>
         <a href="../login" class="nav-link p-0">
