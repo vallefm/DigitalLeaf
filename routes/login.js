@@ -17,7 +17,12 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     let {email, password} = req.body
-    console.log(await login(email, password));
+    let result = await login(email, password)
+    if (result.status) {
+        res.redirect('/home')
+    } else {
+        console.log(result.status)
+    }
 })
 
 export {router as loginRouter}
