@@ -12,7 +12,7 @@ async function login(email, password){
     let result = {}
     if (await checkEmailExists(email) && await checkPasswordCorrect(email, password)) {
         result.status = true;
-        result.user = getUserInfo(email)
+        result.user = await getUserInfo(email)
         return result
     } else {
         result.status = false;

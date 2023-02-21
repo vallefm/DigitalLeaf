@@ -2,26 +2,32 @@ import express from 'express'
 import {login} from '../models/authentication.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import e from 'express'
 
 const router = express.Router()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 router.get('/', (req, res) => {
-    res.render(path.join(__dirname+'/../public/views/login'))
-    if (req.session.signup) {
-        console.log("Account created.");
-    } 
+    if (req.session.signup){
+        req.session.signup = false
+        res.status(201).render(path.join(__dirname+'/../public/views/login'),{signup: true})
+    }
+    res.status(200).render(path.join(__dirname+'/../public/views/login'),{signup: req.session.signup})
 })
 
 router.post('/', async (req, res) => {
     let {email, password} = req.body
     let result = await login(email, password)
     if (result.status) {
+        req.session.user = {}
+        req.session.user.id = result.user.id
+        req.session.user.email = result.user.email
+        req.session.user.firstName = result.user.first_name
+        req.session.user.lastName = result.user.last_name
+        req.session.loggedIn = true;
         res.redirect('/home')
     } else {
-        console.log(result.status)
+        res.status(400).render(path.join(__dirname+'/../public/views/login'),{signup: req.session.signup, fail: true})
     }
 })
 
