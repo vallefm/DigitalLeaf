@@ -41,8 +41,12 @@ async function getUserInfo(email) {
 async function createUser(firstName, lastName, email, password) {
     let encryptedPass = await bcrypt.hash(password, SALT)
     let newId = createUserID()
-    let result = await conn.query("INSERT INTO users VALUES (?, ?, ?, ?, ?, NOW())", [newId, firstName, lastName, email, encryptedPass])
-    return result
+    try {  
+        await conn.query("INSERT INTO users VALUES (?, ?, ?, ?, ?, NOW())", [newId, firstName, lastName, email, encryptedPass])
+        return true
+    } catch (error) {
+        return false
+    }
 }
 
 function createUserID() {

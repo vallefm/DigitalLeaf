@@ -1,15 +1,18 @@
 import express from 'express'
 import {login} from '../models/authentication.js'
-import session from 'express-session'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import e from 'express'
 
 const router = express.Router()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+'/../public/views/login.html'))
+    res.render(path.join(__dirname+'/../public/views/login'))
+    if (req.session.signup) {
+        console.log("Account created.");
+    } 
 })
 
 router.post('/', async (req, res) => {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../components/meta.ejs') %>
+  </head>
+  <body class="vh-100 d-flex flex-column">
+    <header>
+      <%- include('../components/navbar.ejs') %>
+    </header>
+    <main class="d-flex flex-grow-1 align-items-center justify-content-center bg-body-secondary">
+      <form action="" method="POST" class="card p-5" style="max-width: 25rem;">
+        <p class="text-center mb-5 "><strong>Sign Up</strong></p>
+        <div class="mb-2">
+          <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
+        </div>
+        <div class="mb-2">
+            <input type="text" name="firstName" id="firstName" placeholder="First name" class="form-control" autocomplete="given-name" required>
+        </div>
+        <div class="mb-2">
+            <input type="text" name="lastName" id="lastName" placeholder="Last name" class="form-control" autocomplete="family-name" required>
+        </div>
+        <script src="../js/signup.js" defer></script>
+        <div class="mb-2">
+          <input type="password" name="password" id="password" placeholder="Password" class="form-control" minlength="8" required>
+        </div>
+        <div class="mb-2">
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-dark mb-5">Create Account</button>
+        <a href="../views/login.html" class="link-secondary fw-light text-decoration-none link-small text-center">Already have an account? Log in.</a>
+      </form>
+    </main>
+    <footer></footer>
+  </body>
+</html>
