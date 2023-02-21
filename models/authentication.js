@@ -9,10 +9,14 @@ import bcrypt from 'bcryptjs'
 const SALT = await bcrypt.genSalt(10)
 
 async function login(email, password){
+    let result = {}
     if (await checkEmailExists(email) && await checkPasswordCorrect(email, password)) {
-        return getUserInfo(email)
+        result.status = true;
+        result.user = getUserInfo(email)
+        return result
     } else {
-        return "Email or password not correct."
+        result.status = false;
+        return result
     }
 }
 
