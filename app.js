@@ -12,6 +12,7 @@ import { forgotPasswordRouter } from "./routes/forgot_Password.js";
 import { homeRouter } from "./routes/home.js";
 import { projectRouter } from "./routes/project.js"
 import { teamRouter } from "./routes/team.js";
+import { scheduleRouter } from "./routes/schedule.js";
 
 const app = express();
 const port = 8080;
@@ -43,6 +44,7 @@ app.use("/forgotPassword", forgotPasswordRouter)
 app.use("/home", homeRouter)
 app.use("/team", teamRouter)
 app.use("/project", projectRouter)
+app.use("/schedule", scheduleRouter)
 app.use("/logout", logoutRouter)
 
 // Home route
