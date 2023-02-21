@@ -1,8 +1,11 @@
+/** SQL queries handled in
+ * {@link ../models/authentication}
+ */
+
 import express from 'express'
 import {login} from '../models/authentication.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import e from 'express'
 
 const router = express.Router()
 const __filename = fileURLToPath(import.meta.url)
@@ -17,7 +20,12 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     let {email, password} = req.body
-    console.log(await login(email, password));
+    let result = await login(email, password)
+    if(result.status) {
+        res.redirect('/home')
+    } else {
+        console.log(result.status)
+    }
 })
 
 export {router as loginRouter}
