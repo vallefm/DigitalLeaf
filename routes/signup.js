@@ -8,12 +8,18 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+'/../public/views/signup.html'))
+    res.render(path.join(__dirname+'/../public/views/signup'))
+    req.session.signup = null;
 })
 
 router.post('/', async (req, res) => {
     let {firstName, lastName, email, password} = req.body
-    console.log(await createUser(firstName, lastName, email, password))
+    if(await createUser(firstName, lastName, email, password)){
+        req.session.signup = true;
+        res.status(201).redirect('../login')
+    } else {
+        res.status(400).send('Email already exists.')
+    }
 })
 
 export {router as signupRouter}
