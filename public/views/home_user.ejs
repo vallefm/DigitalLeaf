@@ -4,11 +4,9 @@
     <%- include('../components/meta.ejs') %>
   </head>
   <body class="vh-100 d-flex flex-column">
-    <header><%- include('../components/navbar.ejs') %></header>
-
-    <main class="d-flex flex-grow-1 align-items-start justify-content-left bg-body-secondary">
-      <div class="btn btn-dark">TEST LOGGED IN USER FIRST NAME <%= firstName %></div>
-      <div class="container" id="sidebarMenu"></div>
+    <header><%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName: firstName}) %></header>
+    <main class="d-flex flex-grow-1 bg-body-secondary">
+      <%- include('../components/sidebar.ejs') %>
       <!--Contains the clickable buttons at the top, will need to turn into a script to add quick actions that the user can set up-->
       <div class="container mt-3">
         <div class="btn-group">

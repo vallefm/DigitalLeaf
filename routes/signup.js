@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
         req.session.signup = true;
         res.status(201).redirect('../login')
     } else {
-        res.status(400).send('Email already exists.')
+        res.status(400).render(path.join(__dirname+'/../public/views/signup'), {fail: true})
     }
 })
 

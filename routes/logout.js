@@ -7,7 +7,9 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 router.get('/', (req, res) => {
-    res.render(path.join(__dirname+'/../public/views/forgot_Password'))
+    req.session.loggedIn = false
+    req.session.destroy()
+    res.redirect('/')
 })
 
-export {router as forgotPasswordRouter}
+export {router as logoutRouter}
