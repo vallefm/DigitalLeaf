@@ -1,13 +1,18 @@
-import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const router = express.Router()
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
-router.get('/', (req, res) => {
-    res.render(path.join(__dirname+'/../public/views/project'), {loggedIn: req.session.loggedIn, firstName: req.session.user.firstName})
-})
+const router = express.Router();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-export {router as projectRouter}
+router.get("/", (req, res) => {
+    
+  res.render(path.join(__dirname + "/../public/views/project"), {
+    loggedIn: req.session.loggedIn,
+    firstName: req.session.user.firstName,
+  });
+});
+
+export { router as projectRouter };
