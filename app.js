@@ -7,6 +7,7 @@ import { loginRouter } from './routes/login.js'
 import { signupRouter } from './routes/signup.js'
 import { forgotPasswordRouter } from './routes/forgot_Password.js'
 import { homeRouter } from './routes/home.js'
+import { scheduleRouter } from './routes/schedule.js'
 
 const app = express()
 const port = 8080
@@ -25,6 +26,7 @@ app.use('/login', loginRouter)
 app.use('/signup', signupRouter)
 app.use('/forgotPassword', forgotPasswordRouter)
 app.use('/home', homeRouter)
+app.use('/schedule', scheduleRouter)
 
 // Home route
 app.get('/', (req, res) => {

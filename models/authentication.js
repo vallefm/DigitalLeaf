@@ -6,7 +6,7 @@
 import { conn } from '../connection.js'
 import bcrypt from 'bcryptjs'
 
-const SALT = await bcrypt.genSalt(10)
+const SALT =  bcrypt.genSalt(10)
 
 async function login(email, password){
     if (await checkEmailExists(email) && await checkPasswordCorrect(email, password)) {
