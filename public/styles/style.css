@@ -1,5 +1,21 @@
+:root {
+  --leaf-green: rgb(0, 185, 0);
+}
+
 body {
   font-family: sans-serif;
+}
+
+.content::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.content::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 5px;
+}
+.content::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 .logo-small {
@@ -8,4 +24,8 @@ body {
 
 .link-small {
   font-size: 12px;
+}
+
+.text-leaf-green {
+  color: var(--leaf-green);
 }/*# sourceMappingURL=style.css.map */

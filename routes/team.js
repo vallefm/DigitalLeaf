@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 router.get('/', (req, res) => {
-    res.render(path.join(__dirname+'/../public/views/forgot_Password'))
+    res.render(path.join(__dirname+'/../public/views/home_team'), {loggedIn: req.session.loggedIn, firstName: req.session.user.firstName})
 })
 
-export {router as forgotPasswordRouter}
+export {router as teamRouter}

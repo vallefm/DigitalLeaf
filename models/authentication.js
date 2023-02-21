@@ -11,8 +11,13 @@ const SALT = await bcrypt.genSalt(10)
 async function login(email, password){
     let result = {}
     if (await checkEmailExists(email) && await checkPasswordCorrect(email, password)) {
+<<<<<<< HEAD
         result.status = true
         result.user = getUserInfo(email)
+=======
+        result.status = true;
+        result.user = await getUserInfo(email)
+>>>>>>> origin
         return result
     } else {
         result.status = false;
