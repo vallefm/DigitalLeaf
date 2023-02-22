@@ -15,18 +15,11 @@
         <%# include('../components/projects/project_card.ejs') #%>
         <!-- <hr /> -->
 
-<<<<<<< HEAD
         
-        <a href="../views/create_project.ejs" class="btn btn-dark">Create Project</a>
+        <a href="../create_project" class="btn btn-dark">Create Project</a>
         <hr />
 
         <h3>My Projects</h3>
-=======
-        <div class="d-flex justify-content-between">
-          <h3>My Projects</h3>
-          <button class="btn btn-success">New Project</button>
-        </div>
->>>>>>> 3b17ff5b2f0f5efcfb4a1eefa0fe7e29f514059e
         <hr />
         <div class="d-flex gap-4 py-2 mb-4 content overflow-x-auto">
         <% for (let project of projects) { if (project.teamId == null) {%>
