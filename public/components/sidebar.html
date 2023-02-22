@@ -1,0 +1,84 @@
+<nav id="sidebarMenu" class="sidebar" >
+    <div class="sidebar">
+      <h3> Project Scheduler</h3>
+      <a href="#">Home</a>
+      <a href="#">Teams</a>
+      <a href="/schedule">Schedule</a>
+    </div>
+  
+  
+  </nav>
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+  <style>
+     .sidebar {
+      background-color: black;
+      color: white;
+      width: 200px;
+      position: fixed;
+      top: 0px; /* Adjust this value to match the height of any elements before the sidebar */
+      bottom: 0;
+      left: 0;
+      padding-top: 10px;
+      text-align: center;
+    }
+  
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 0;
+      transition: font-size 0.2s ease-in-out;
+    }
+  
+    .sidebar h2:hover {
+      font-size: 30px;
+    }
+  
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
+  
+    .sidebar a:hover {
+      background-color: grey;
+    }
+  
+    .container {
+      margin-left: 220px;
+      padding: 20px;
+    }
+  
+    @media (max-width: 602px) {
+        .sidebar {
+      background-color: black;
+      color: white;
+      width: 200px;
+      position: fixed;
+      top: 100px; /* Adjust this value to match the height of any elements before the sidebar */
+      bottom: 0;
+      left: 0;
+      padding-top: 20px;
+      text-align: center;
+    }
+  
+      .sidebar.show {
+        left: 0;
+      }
+  
+      .container {
+        margin-left: 0;
+      }
+    }
+  </style>
+  
+  <script>
+    $(document).ready(function () {
+      $("#sidebarMenu .sidebar a").click(function () {
+        $("#sidebarMenu").removeClass("show");
+      });
+    });
+  </script>
+  

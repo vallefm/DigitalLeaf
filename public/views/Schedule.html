@@ -1,0 +1,361 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script>
+        $(function () {
+          $("#navigation").load("../components/navbar.html");
+          $("#sidebarMenu").load("../components/sidebar.html");
+        });
+      </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ 
+     <style>
+    table {
+      border-collapse: collapse;
+      width: 120%;
+      margin-top: -8%;
+    }
+    
+    th, td {
+      text-align: center;
+      padding: 5px;
+      border: 1px solid black;
+       
+    }
+
+    th {
+      background-color: #f2f2f2;
+      
+     
+    }
+    td{
+     height: 100px;
+     width: 900000px;
+    }
+
+    .rounded p-2 my-2 {
+  background-color: #ffc107;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.rounded p-2 my-2:hover{
+  transform: scale(1.2);
+}
+
+    .add-icon {
+      font-size: 24px;
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    .add-icon:hover {
+      color: #0056b3;
+    }
+
+    .line {
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  </style>
+    <script>
+      function displaySchedule() {
+        var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var slots = ['9:00 AM - 10:00 AM', '10:00 AM - 11:00 AM', '11:00 AM - 12:00 PM', '12:00 PM - 1:00 PM', '1:00 PM - 2:00 PM', '2:00 PM - 3:00 PM', '3:00 PM - 4:00 PM', '4:00 PM - 5:00 PM'];
+        
+        var table = document.createElement('table');
+        var thead = document.createElement('thead');
+        var tbody = document.createElement('tbody');
+
+        // Create table header
+        var headerRow = document.createElement('tr');
+        var dayHeader = document.createElement('th');
+        dayHeader.appendChild(document.createTextNode('Day'));
+        headerRow.appendChild(dayHeader);
+
+        for (var i = 0; i < slots.length; i++) {
+          var slotHeader = document.createElement('th');
+          slotHeader.appendChild(document.createTextNode(slots[i]));
+          headerRow.appendChild(slotHeader);
+        }
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create table body
+        for (var i = 0; i < days.length; i++) {
+          var row = document.createElement('tr');
+          var dayCell = document.createElement('td');
+          dayCell.appendChild(document.createTextNode(days[i]));
+          row.appendChild(dayCell);
+
+          for (var j = 0; j < slots.length; j++) {
+            var cell = document.createElement('td');
+            cell.setAttribute('id', days[i] + slots[j]);
+            var button = document.createElement('button');
+            button.setAttribute('type', 'button');
+            button.setAttribute('class', 'btn btn-sm btn-outline-primary');
+            button.setAttribute('data-toggle', 'modal');
+            button.setAttribute('data-target', '#' + days[i] + slots[j] + 'Modal');
+            button.innerHTML = '<i class="fa fa-plus"></i>';
+            cell.appendChild(button);
+
+            var modal = document.createElement('div');
+            modal.setAttribute('class', 'modal fade');
+            modal.setAttribute('id', days[i] + slots[j] + 'Modal');
+            modal.setAttribute('tabindex', '-1');
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-labelledby', days[i] + slots[j] + 'ModalLabel');
+            modal.setAttribute('aria-hidden', 'true');
+
+            var modalDialog = document.createElement('div');
+            modalDialog.setAttribute('class', 'modal-dialog');
+            modalDialog.setAttribute('role', 'document');
+
+            var modalContent = document.createElement('div');
+            modalContent.setAttribute('class', 'modal-content');
+
+            var modalHeader = document.createElement('div');
+            modalHeader.setAttribute('class', 'modal-header');
+
+            var modalTitle = document.createElement('h5');
+            modalTitle.setAttribute('class', 'modal-title');
+            modalTitle.setAttribute('id', days[i] + slots[j] + 'ModalLabel');
+modalTitle.appendChild(document.createTextNode('Add Task'));
+        var closeButton = document.createElement('button');
+        closeButton.setAttribute('type', 'button');
+        closeButton.setAttribute('class', 'close');
+        closeButton.setAttribute('data-dismiss', 'modal');
+        closeButton.setAttribute('aria-label', 'Close');
+
+        var closeIcon = document.createElement('span');
+        closeIcon.setAttribute('aria-hidden', 'true');
+        closeIcon.innerHTML = '&times;';
+
+        closeButton.appendChild(closeIcon);
+        modalHeader.appendChild(modalTitle);
+        modalHeader.appendChild(closeButton);
+        modalContent.appendChild(modalHeader);
+
+        var modalBody = document.createElement('div');
+        modalBody.setAttribute('class', 'modal-body');
+
+        var form = document.createElement('form');
+        form.setAttribute('id', days[i] + slots[j] + 'Form');
+
+        var formGroup = document.createElement('div');
+        formGroup.setAttribute('class', 'form-group');
+
+        var label = document.createElement('label');
+        label.setAttribute('for', days[i] + slots[j] + 'Input');
+        label.appendChild(document.createTextNode('Task'));
+
+        var input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('class', 'form-control');
+        input.setAttribute('id', days[i] + slots[j] + 'Input');
+
+        formGroup.appendChild(label);
+        formGroup.appendChild(input);
+        form.appendChild(formGroup);
+        modalBody.appendChild(form);
+        modalContent.appendChild(modalBody);
+
+        var modalFooter = document.createElement('div');
+        modalFooter.setAttribute('class', 'modal-footer');
+
+        var saveButton = document.createElement('button');
+        saveButton.setAttribute('type', 'button');
+        saveButton.setAttribute('class', 'btn btn-primary');
+        saveButton.setAttribute('onclick', 'addTask("' + days[i] + slots[j] + '")');
+        saveButton.appendChild(document.createTextNode('Save'));
+
+        modalFooter.appendChild(saveButton);
+        modalContent.appendChild(modalFooter);
+        modalDialog.appendChild(modalContent);
+        modal.appendChild(modalDialog);
+        cell.appendChild(modal);
+        row.appendChild(cell);
+      }
+      tbody.appendChild(row);
+    }
+
+    table.appendChild(tbody);
+
+    document.getElementById('schedule').appendChild(table);
+
+  }
+
+  function addTask(id) {
+    var input = document.getElementById(id + 'Input').value;
+    var cell = document.getElementById(id);
+    var task = document.createElement('div');
+    task.setAttribute('class', 'rounded p-2 my-2');
+    task.style.backgroundColor = '#ffc107';
+    task.style.borderRadius = '30px'
+    task.appendChild(document.createTextNode(input));
+    task.style.transition = 'transform 0.2s ease-in-out';
+   
+
+task.addEventListener('mouseenter', function() {
+  task.style.transform = 'scale(1.1)';
+});
+
+task.addEventListener('mouseleave', function() {
+  task.style.transform = 'scale(1)';
+});
+    cell.appendChild(task);
+    $('#' + id + 'Modal').modal('hide');
+  }
+</script>
+<script>
+    $(function () {
+        $("#navigation").load("../components/navbar.html")
+      $("#sidebarMenu").load("../components/sidebar.html");
+    });
+  </script>
+ </head>
+  <body onload="displaySchedule()">
+    <header>
+        <nav class="navbar navbar-expand-md" style="margin-left: 18%; justify-content: space-between;">
+            <a href="../" class="navbar-brand">
+              <div class="d-flex align-items-center gap-6">
+                <img src="../images/leaf_icon.png" alt="Leaf Logo" class="logo-small" />
+                Digital Leaf
+              </div>
+            </a>
+            <button 
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#toggleNavMenu"
+              aria-controls="toggleNavMenu"
+              aria-expanded="false"
+              aria-label="toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-center" id="toggleNavMenu" >
+              <ul class="navbar-nav ms-auto d-flex align-items-center">
+                <li style="margin-left: 1200%;">
+                  <a href="./login" class="nav-link"
+                    ><button class="btn btn-dark" >Log In</button></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <hr class="line">
+          
+   
+    
+        <button style="justify-content:center; align-items:center; justify-content:center; margin-left: 40%; border-radius: 25px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><h1 class="text-center" style="margin-top: 0%;"> Schedule of your tasks</h1></button>
+        <!--Sets the class that the sript for the navbar interacts with-->
+        
+  
+      </header>
+      <div class="container" id="navigation"></div>
+      <div class ="container" id="sidebarMenu"></div>
+
+      <!-- //this is side bar -->
+      <nav id="sidebarMenu" class="sidebar" >
+        <div class="sidebar">
+          <h3> Project Scheduler</h3>
+          <a href="/home">Home</a>
+          <a href="#">Teams</a>
+          <a href="/schedule">Schedule</a>
+        </div>
+      
+      
+      </nav>
+      
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      
+      <style>
+         .sidebar {
+          background-color: black;
+          color: white;
+          width: 200px;
+          position: fixed;
+          top: 0px; /* Adjust this value to match the height of any elements before the sidebar */
+          bottom: 0;
+          left: 0;
+          padding-top: 10px;
+          text-align: center;
+        }
+      
+        .sidebar h2 {
+          font-size: 24px;
+          margin-bottom: 0;
+          transition: font-size 0.2s ease-in-out;
+        }
+      
+        .sidebar h2:hover {
+          font-size: 30px;
+        }
+      
+        .sidebar a {
+          color: white;
+          text-decoration: none;
+          display: block;
+          padding: 10px;
+        }
+      
+        .sidebar a:hover {
+          background-color: grey;
+        }
+      
+        .container {
+          margin-left: 220px;
+          padding: 20px;
+        }
+      
+        @media (max-width: 602px) {
+            .sidebar {
+          background-color: black;
+          color: white;
+          width: 200px;
+          position: fixed;
+          top: 100px; /* Adjust this value to match the height of any elements before the sidebar */
+          bottom: 0;
+          left: 0;
+          padding-top: 20px;
+          text-align: center;
+        }
+      
+          .sidebar.show {
+            left: 0;
+          }
+      
+          .container {
+            margin-left: 0;
+          }
+        }
+      </style>
+      
+      <script>
+        $(document).ready(function () {
+          $("#sidebarMenu .sidebar a").click(function () {
+            $("#sidebarMenu").removeClass("show");
+          });
+        });
+      </script>
+      
+      
+   
+    <div class="container">
+
+      <div id="schedule"></div>
+    </div>
+  </body>
+</html>

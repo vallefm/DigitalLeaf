@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Digital Leaf</title>
+    <!-- Link for title image -->
+    <link rel="icon" type="image/png" href="../images/leaf_icon.png" />
+
+    <!-- Link for Bootstrap 5 CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <!-- Link for stylesheet -->
+    <link rel="stylesheet" href="../styles/style.css" />
+    <!-- Script Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Script Jquery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("#navigation").load("../components/navbar.html");
+        $("#sidebarMenu").load("../components/sidebar.html");
+      });
+    </script>
+  </head>
+  <body class="vh-100 d-flex flex-column">
+    
+
+    
+    <header>
+      <!--Sets the class that the sript for the navbar interacts with-->
+      <div class="container" id="navigation"></div>
+
+    </header>
+    <div class="container" id="sidebarMenu"></div>
+    <main
+      class="d-flex flex-grow-1 align-items-start justify-content-left bg-body-secondary" 
+     style="margin-top: -3%">
+    
+
+    
+      <!--Contains the clickable buttons at the top, will need to turn into a script to add quick actions that the user can set up-->
+      <div class="container mt-3" >
+        <div class="btn-group" style="position: relative; overflow-x: hidden;">
+          <button type="button" class="btn btn-dark" onclick="location.href='/home'">
+            Homes
+          </button>
+          <button type="button" class="btn btn-dark" href="#projects">
+            Projects
+          </button>
+          <button type="button" class="btn btn-dark" onclick="location.href='/schedule'">
+            Schedule
+          </button>
+          <!--This button will be the quick action addition-->
+          <button type="button" class="btn btn-dark" href="#projects">+</button>
+        </div>
+
+        <p> </p>
+        <h3>Annoucements</h3>
+        <hr />
+        <h3>Header</h3>
+        <p> here is where the announcements will go</p>
+        <br>
+
+        <h3>Header</h3>
+        <p> here is where the announcements will go</p>
+        <br>
+        <h3>Header</h3>
+        <p> here is where the announcements will go</p>
+        <br>
+
+      </div>
+    </main>
+  </body>
+</html>
