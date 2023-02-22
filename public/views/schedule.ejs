@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../components/meta.ejs') %>
+  </head>
+  <body class="vh-100 d-flex flex-column">
+    <header><%- include('../components/navbar.ejs') %></header>
+
+    <main class="d-flex flex-grow-1 bg-body-secondary">
+      <%- include('../components/sidebar.ejs') %>
+      <div class="container">
+        <%- include('../components/actionbar.ejs', {schedule: true}) %>
+        <h1 class="text-success">Sorry, under construction!</h1>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>
