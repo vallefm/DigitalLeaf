@@ -21,10 +21,10 @@ async function getUserProjects(userId) {
 async function createProject(projectName, description) {
   let newProjectId = createProjectID()
   let setProgress = 0
-  let teamId = ''
-  let creatorId = ''
+  let teamId = 'placeholder'
+  let creatorId = 'placeholder'
   try {
-    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, setProgress, teamId, creatorId ])
+    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, setProgress, teamId, creatorId ])
     return true
   } catch (error) {
     return false
