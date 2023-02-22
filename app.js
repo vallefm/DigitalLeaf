@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 import session from "express-session";
 
 //Router imports
-<<<<<<< HEAD
 import { loginRouter } from "./routes/login.js";
 import { logoutRouter } from "./routes/logout.js";
 import { signupRouter } from "./routes/signup.js";
@@ -14,17 +13,6 @@ import { homeRouter } from "./routes/home.js";
 import { projectRouter } from "./routes/project.js"
 import { teamRouter } from "./routes/team.js";
 import { scheduleRouter } from "./routes/schedule.js";
-=======
-import { loginRouter } from './routes/login.js'
-import { signupRouter } from './routes/signup.js'
-import { forgotPasswordRouter } from './routes/forgot_Password.js'
-import { homeRouter } from './routes/home.js'
-
-import { scheduleRouter } from './routes/schedule.js'
-
-import session from 'express-session'
-//>>>>>>> b2525fa3e7a0d6d9211e50ca6d25d279524237e0
->>>>>>> Bishal
 
 const app = express();
 const port = 8080;
@@ -50,7 +38,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Route handling
-<<<<<<< HEAD
 app.use("/login", loginRouter)
 app.use("/signup", signupRouter)
 app.use("/forgotPassword", forgotPasswordRouter)
@@ -59,13 +46,6 @@ app.use("/team", teamRouter)
 app.use("/project", projectRouter)
 app.use("/schedule", scheduleRouter)
 app.use("/logout", logoutRouter)
-=======
-app.use('/login', loginRouter)
-app.use('/signup', signupRouter)
-app.use('/forgotPassword', forgotPasswordRouter)
-app.use('/home', homeRouter)
-app.use('/schedule', scheduleRouter)
->>>>>>> Bishal
 
 // Home route
 app.get("/", (req, res) => {
