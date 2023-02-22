@@ -13,11 +13,8 @@ import { homeRouter } from "./routes/home.js";
 import { projectRouter } from "./routes/project.js"
 import { teamRouter } from "./routes/team.js";
 import { scheduleRouter } from "./routes/schedule.js";
-<<<<<<< HEAD
 import { createProjectRouter } from "./routes/create_project.js";
-=======
 import { inboxRouter } from "./routes/inbox.js";
->>>>>>> 3b17ff5b2f0f5efcfb4a1eefa0fe7e29f514059e
 
 const app = express();
 const port = 8080;
