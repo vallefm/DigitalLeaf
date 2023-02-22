@@ -21,9 +21,12 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse text-center" id="toggleNavMenu">
+    <% if (locals.team) {%>
+      <p class="text-center"><%- team %></p>
+    <%}%>
     <ul class="navbar-nav ms-auto d-flex align-items-center">
       <% if (locals.loggedIn && locals.firstName) {%>
-        <p class="my-auto"><%- firstName %></p>
+        <p class="my-auto text-capitalize"><%- firstName %></p>
       <% } else { %>
       <li>
         <a href="../login" class="nav-link p-0">
