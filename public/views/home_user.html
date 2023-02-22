@@ -32,32 +32,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script>
       $(function () {
-        $("#navigation").load("../layout/navbar.html");
-        $("#sidebarMenu").load("../layout/sidebar.html");
+        $("#navigation").load("../components/navbar.html");
+        $("#sidebarMenu").load("../components/sidebar.html");
       });
     </script>
   </head>
   <body class="vh-100 d-flex flex-column">
+    
+
+    
     <header>
       <!--Sets the class that the sript for the navbar interacts with-->
       <div class="container" id="navigation"></div>
 
     </header>
-
-    <main
-      class="d-flex flex-grow-1 align-items-start justify-content-left bg-body-secondary"
-    >
     <div class="container" id="sidebarMenu"></div>
+    <main
+      class="d-flex flex-grow-1 align-items-start justify-content-left bg-body-secondary" 
+     style="margin-top: -3%">
+    
+
+    
       <!--Contains the clickable buttons at the top, will need to turn into a script to add quick actions that the user can set up-->
-      <div class="container mt-3">
-        <div class="btn-group">
-          <button type="button" class="btn btn-dark" href="#projects">
-            Home
+      <div class="container mt-3" >
+        <div class="btn-group" style="position: relative; overflow-x: hidden;">
+          <button type="button" class="btn btn-dark" onclick="location.href='/home'">
+            Homes
           </button>
           <button type="button" class="btn btn-dark" href="#projects">
             Projects
           </button>
-          <button type="button" class="btn btn-dark" href="#projects">
+          <button type="button" class="btn btn-dark" onclick="location.href='/schedule'">
             Schedule
           </button>
           <!--This button will be the quick action addition-->

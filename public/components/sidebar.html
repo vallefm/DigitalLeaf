@@ -1,32 +1,84 @@
-<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" style="width: 20%;">
-    <div class="position-sticky"  >
-      <div class="list-group list-group-flush mx-3 mt-4">
-        <div class="dropdown">
-            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Home</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Tasks</a></li>
-                <li><a class="dropdown-item" href="#">Reminders</a></li>
-            </ul>
-        </div>
-        <div class="dropdown">
-            <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Teams</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Tasks</a></li>
-                <li><a class="dropdown-item" href="#">Reminders</a></li>
-            </ul>
-        </div>
-        <button style="width: 80%;" type="button" class="btn btn-dark">Inbox</button>
-
-        <div class="dropdown dropend">
-            <button type="button" class="btn btn-dark" data-bs-toggle="dropdown">Settings</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Account</a></li>
-                <li><a class="dropdown-item" href="#">About Us</a></li>
-            </ul>
-        </div>
-
-
-      </div>
+<nav id="sidebarMenu" class="sidebar" >
+    <div class="sidebar">
+      <h3> Project Scheduler</h3>
+      <a href="#">Home</a>
+      <a href="#">Teams</a>
+      <a href="/schedule">Schedule</a>
     </div>
+  
+  
   </nav>
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+  <style>
+     .sidebar {
+      background-color: black;
+      color: white;
+      width: 200px;
+      position: fixed;
+      top: 0px; /* Adjust this value to match the height of any elements before the sidebar */
+      bottom: 0;
+      left: 0;
+      padding-top: 10px;
+      text-align: center;
+    }
+  
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 0;
+      transition: font-size 0.2s ease-in-out;
+    }
+  
+    .sidebar h2:hover {
+      font-size: 30px;
+    }
+  
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
+  
+    .sidebar a:hover {
+      background-color: grey;
+    }
+  
+    .container {
+      margin-left: 220px;
+      padding: 20px;
+    }
+  
+    @media (max-width: 602px) {
+        .sidebar {
+      background-color: black;
+      color: white;
+      width: 200px;
+      position: fixed;
+      top: 100px; /* Adjust this value to match the height of any elements before the sidebar */
+      bottom: 0;
+      left: 0;
+      padding-top: 20px;
+      text-align: center;
+    }
+  
+      .sidebar.show {
+        left: 0;
+      }
+  
+      .container {
+        margin-left: 0;
+      }
+    }
+  </style>
+  
+  <script>
+    $(document).ready(function () {
+      $("#sidebarMenu .sidebar a").click(function () {
+        $("#sidebarMenu").removeClass("show");
+      });
+    });
+  </script>
+  
