@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    let {} = req.body
-    if(await createProject(projectName, description, date)){
+    let {projectName, description} = req.body
+    if(await createProject(projectName, description)){
         req.session.createProject = true;
         res.status(201).redirect('../project')
     } else {

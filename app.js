@@ -13,6 +13,7 @@ import { homeRouter } from "./routes/home.js";
 import { projectRouter } from "./routes/project.js"
 import { teamRouter } from "./routes/team.js";
 import { scheduleRouter } from "./routes/schedule.js";
+import { createProjectRouter } from "./routes/create_project.js";
 
 const app = express();
 const port = 8080;
@@ -46,6 +47,7 @@ app.use("/team", teamRouter)
 app.use("/project", projectRouter)
 app.use("/schedule", scheduleRouter)
 app.use("/logout", logoutRouter)
+app.use("/create_project", createProjectRouter)
 
 // Home route
 app.get("/", (req, res) => {

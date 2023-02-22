@@ -18,13 +18,13 @@ async function getUserProjects(userId) {
   return result;
 }
 
-async function createProject(projectName, description, createdAt) {
+async function createProject(projectName, description) {
   let newProjectId = createProjectID()
   let setProgress = 0
   let teamId = ''
   let creatorId = ''
   try {
-    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, setProgress, teamId, creatorId, createdAt ])
+    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, setProgress, teamId, creatorId ])
     return true
   } catch (error) {
     return false
@@ -35,7 +35,7 @@ async function createProject(projectName, description, createdAt) {
 function createProjectID() {
   let projectId = 'prj'+randomId()
   while (!checkIdExists(projectId)){
-    projectId = 'usr'+randomId()
+    projectId = 'prj'+randomId()
   }
   return projectId
 }
@@ -57,3 +57,4 @@ function randomId() {
 }
 
 export { getUserProjects };
+export { createProject };
