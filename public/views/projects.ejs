@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../components/meta.ejs') %>
+  </head>
+  <body class="vh-100 d-flex flex-column">
+    <header>
+      <%- include('../components/navbar.ejs', {loggedIn, firstName}) %>
+    </header>
+    <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
+      <%- include('../components/sidebar.ejs') %>
+      <div class="container mt-5 content overflow-y-auto overflow-x-hidden">
+        <%- include('../components/actionbar.ejs', {firstName}) %>
+        <!-- Commented this section out temporarily until backend is set up -->
+
+        <!-- <h3>Recent Projects</h3> -->
+        <%# include('../components/projects/project_card.ejs') #%>
+        <!-- <hr /> -->
+
+        <div class="d-flex justify-content-between">
+          <h3>My Projects</h3>
+          <a href="../create_project" class="btn btn-dark">Create Project</a>
+        </div>
+
+        <hr />
+        <div class="d-flex gap-4 py-2 mb-4 content overflow-x-auto">
+          <% for (let project of projects) { if (project.teamId == null) {%> <%-
+          include('../components/projects/project_card.ejs', {projectName:
+          project.projectName, firstName: firstName, private: true}) %> <% }} %>
+        </div>
+        <h3>Team Projects</h3>
+        <hr />
+        <% for (let project of projects) { if (project.teamId != null) {%> <%-
+        include('../components/projects/project_card.ejs', {projectName:
+        project.projectName, teamName: project.teamName}) %> <% }} %>
+      </div>
+    </main>
+  </body>
+</html>

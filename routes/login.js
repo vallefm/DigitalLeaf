@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
         req.session.user.firstName = result.user.first_name
         req.session.user.lastName = result.user.last_name
         req.session.loggedIn = true;
-        res.redirect('/home')
+        res.redirect(`/${req.session.user.firstName}/home`)
     } else {
         res.status(400).render(path.join(__dirname+'/../public/views/login'),{signup: req.session.signup, fail: true})
     }
