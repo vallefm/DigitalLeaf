@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
-      <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName:firstName}) %>
-
-    
-
+    <%- include('../components/meta.ejs') %>
+  </head>
+  <body class="vh-100 d-flex flex-column">
+    <header>
+      <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName: firstName}) %>
     </header>
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
@@ -30,7 +30,6 @@
         <% for (let project of projects) { if (project.teamId != null) {%>
           <%- include('../components/projects/project_card.ejs', {projectName: project.projectName, teamName: project.teamName}) %>
         <% }} %> 
-
       </div>
     </main>
   </body>
