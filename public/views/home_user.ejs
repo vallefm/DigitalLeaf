@@ -5,8 +5,7 @@
   </head>
   <body class="vh-100 d-flex flex-column">
     <header>
-      <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName:
-      firstName}) %>
+      <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName: firstName}) %>
     </header>
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
@@ -16,11 +15,14 @@
         <%# include('../components/projects/project_card.ejs') #%>
         <!-- <hr /> -->
 
-        <h3>My Projects</h3>
+        <div class="d-flex justify-content-between">
+          <h3>My Projects</h3>
+          <button class="btn btn-success">New Project</button>
+        </div>
         <hr />
         <div class="d-flex gap-4 py-2 mb-4 content overflow-x-auto">
         <% for (let project of projects) { if (project.teamId == null) {%>
-          <%- include('../components/projects/project_card.ejs', {projectName: project.projectName, teamName: firstName}) %>
+          <%- include('../components/projects/project_card.ejs', {projectName: project.projectName, firstName: firstName, private: true}) %>
         <% }} %>
         </div>
         <h3>Team Projects</h3>
