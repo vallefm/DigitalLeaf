@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../components/meta.ejs') %>
+      </head>
+      <body class="vh-100 d-flex flex-column">
+        <header>
+          <%- include('../components/navbar.ejs') %>
+        </header>
+
+        <main class="d-flex flex-grow-1 align-items-center justify-content-center bg-body-secondary">
+          <form action="" method="POST" class="card p-5" style="max-width: 25rem;">
+            <p class="text-center mb-5 "><strong>Project Creation</strong></p>
+
+            <div class="mb-2">
+              <input type="text" name="projectName" id="projectName" placeholder="Project Name" class="form-control" required>
+            </div>
+
+            <div class="mb-2">
+                <input type="text" name="description" id="Description" placeholder="Project Description" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <input type="date" name="date" id="date" placeholder="Due Date MM/DD/YY" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-dark mb-5">Add Projectt</button>
+          </form>
+        </main>
+        <footer></footer>
+      </body>
+</html>

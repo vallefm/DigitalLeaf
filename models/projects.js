@@ -18,4 +18,42 @@ async function getUserProjects(userId) {
   return result;
 }
 
+async function createProject(projectName, description, createdAt) {
+  let newProjectId = createProjectID()
+  let setProgress = 0
+  let teamId = ''
+  let creatorId = ''
+  try {
+    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, setProgress, teamId, creatorId, createdAt ])
+    return true
+  } catch (error) {
+    return false
+  }
+
+}
+
+function createProjectID() {
+  let projectId = 'prj'+randomId()
+  while (!checkIdExists(projectId)){
+    projectId = 'usr'+randomId()
+  }
+  return projectId
+}
+
+async function checkIdExists(id) {
+  let exists = false
+  let [countData] = await conn.query("SELECT COUNT(*) as count FROM users WHERE id = ?", [id])
+  let count = countData[0]["count"]
+  if (count != 0) {
+      return false;
+  }
+  return true
+}
+
+// generic 8-digit random id generator. Prepend relevant 3-letter tag to create complete id (usr for users, tsk for task, etc.) 
+function randomId() {
+  let id = Math.round(Math.random()*10000000)
+  return id.toString();
+}
+
 export { getUserProjects };
