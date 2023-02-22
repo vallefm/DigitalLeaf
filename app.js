@@ -10,7 +10,6 @@ import { logoutRouter } from "./routes/logout.js";
 import { signupRouter } from "./routes/signup.js";
 import { forgotPasswordRouter } from "./routes/forgot_Password.js";
 import { userRouter } from "./routes/user.js";
-import { homeRouter } from "./routes/home.js";
 import { projectRouter } from "./routes/project.js"
 import { teamRouter } from "./routes/team.js";
 import { scheduleRouter } from "./routes/schedule.js";
@@ -45,7 +44,6 @@ app.use("/login", loginRouter)
 app.use("/signup", signupRouter)
 app.use("/forgotPassword", forgotPasswordRouter)
 app.use("/:firstName", userRouter)
-app.use("/home", homeRouter)
 app.use("/team", teamRouter)
 app.use("/project", projectRouter)
 app.use("/schedule", scheduleRouter)
