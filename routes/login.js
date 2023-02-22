@@ -1,3 +1,7 @@
+/** SQL queries handled in
+ * {@link ../models/authentication}
+ */
+
 import express from 'express'
 import {login} from '../models/authentication.js'
 import path from 'path'

@@ -5,12 +5,12 @@
   </head>
   <body class="vh-100 d-flex flex-column">
     <header>
-      <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName: firstName}) %>
+      <%- include('../components/navbar.ejs', {loggedIn: loggedIn, firstName: firstName, team: true}) %>
     </header>
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
       <section id="announcements" class="container mt-5">
-        <%- include('../components/actionbar.ejs') %>
+        <%- include('../components/actionbar.ejs', {team: true}) %>
         <h3 class="mt-4">
           Announcements
           <hr />

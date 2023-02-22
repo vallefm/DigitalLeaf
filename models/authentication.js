@@ -6,9 +6,10 @@
 import { conn } from '../connection.js'
 import bcrypt from 'bcryptjs'
 
-const SALT = await bcrypt.genSalt(10)
+
 
 async function login(email, password){
+    const SALT =   await bcrypt.genSalt(10)
     let result = {}
     if (await checkEmailExists(email) && await checkPasswordCorrect(email, password)) {
         result.status = true;
@@ -21,6 +22,7 @@ async function login(email, password){
 }
 
 async function checkEmailExists(email) {
+    
     let [countEmail] = await conn.query("SELECT COUNT(*) as count FROM users WHERE email = ?", [email])
     let count = countEmail[0]["count"]
     if (count <= 0) {
@@ -43,6 +45,7 @@ async function getUserInfo(email) {
 }
 
 async function createUser(firstName, lastName, email, password) {
+    const SALT =   await bcrypt.genSalt(10)
     let encryptedPass = await bcrypt.hash(password, SALT)
     let newId = createUserID()
     try {  
