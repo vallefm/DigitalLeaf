@@ -6,7 +6,7 @@
     style="width: 100%"
   />
   <div class="card-body d-flex flex-column">
-    <a href="../../project" class="btn btn-dark"><% if (locals.projectName) {%><%- projectName %><% } %></a><br />
+    <a href="../../project/<%- projectId %>" class="btn btn-dark"><% if (locals.projectName) {%><%- projectName %><% } %></a><br />
       <% if(locals.firstName && locals.private) {%>
         <a href="../../team" class="link-dark text-decoration-none mx-auto" style="width: fit-content;">
         <i class="bi bi-lock-fill"></i>

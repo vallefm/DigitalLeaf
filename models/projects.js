@@ -18,6 +18,11 @@ async function getUserProjects(userId) {
   return result;
 }
 
+async function getProjectDetails(projectId) {
+  let [result] = await conn.query("select * from projects where id = ? limit 1", [projectId]);
+  return result;
+}
+
 async function createProject(projectName, description) {
   let newProjectId = createProjectID()
   let setProgress = 0
@@ -56,5 +61,4 @@ function randomId() {
   return id.toString();
 }
 
-export { getUserProjects };
-export { createProject };
+export { createProject, getUserProjects, getProjectDetails};
