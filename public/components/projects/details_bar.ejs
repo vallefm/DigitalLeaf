@@ -67,11 +67,14 @@
             Cancel
           </button>
           <a
-            href="/project/<%- project.id %>"
-            class="btn btn-outline-danger"
-            onclick="alert(`No, I won't let you do that. So, hit the OK button and think about what you've done.`)"
-            >Yes, delete this project forever.</a
-          >
+            <%if (user.id == project.creator_id) {%>
+              href="/project/<%- project.id %>/delete"
+            <% } else { %>
+              href="/project/<%- project.id %>"
+              <% } %>
+            class="btn btn-outline-danger">
+            Yes, delete this project forever.
+            </a>
         </div>
       </div>
     </div>

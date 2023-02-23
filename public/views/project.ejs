@@ -11,10 +11,11 @@
       <%- include('../components/sidebar.ejs') %>
       <section id="announcements" class="container mt-5">
         <%- include('../components/actionbar.ejs', {context: 'project', page: 'project', project}) %>
-        <h3 class="mt-4">
-          Project Updates
-          <hr />
-        </h3>
+        <div class="d-flex justify-content-between mt-4">
+          <h3>Project Updates</h3>
+          <a href="/project/<%-project.id %>" class="btn btn-dark d-flex align-items-center gap-1"><i class="bi bi-plus-lg"></i>Add Update</a>
+        </div>
+        <hr>
         <div class="content overflow-y-auto" style="height: 80%;">
           <%- include('../components/projects/announcement.ejs') %>
           <%- include('../components/projects/announcement.ejs') %>
@@ -25,7 +26,7 @@
           <%- include('../components/projects/announcement.ejs') %>
         </div>
       </section>
-      <%- include('../components/projects/details_bar.ejs', {project}) %>
+      <%- include('../components/projects/details_bar.ejs', {project, user}) %>
     </main>
   </body>
 </html>

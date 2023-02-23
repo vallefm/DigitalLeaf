@@ -9,14 +9,23 @@
     </header>
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
-      <section id="announcements" class="container mt-5">
+      <section id="tasks" class="container mt-5">
         <%- include('../components/actionbar.ejs', {context: 'project', page: 'tasks', project}) %>
-        <h3 class="mt-4">
-          Tasks
-          <hr />
-        </h3>
+        
+        <div class="d-flex justify-content-between mt-4">
+          <h3>Tasks</h3>
+          <a href="/project/<%-project.id %>/tasks" class="btn btn-dark d-flex align-items-center gap-1"><i class="bi bi-plus-lg"></i>Create Task</a>
+        </div>
+        <hr>
+
+        <div class="content overflow-y-auto" style="height: 80%;">
+          <%- include('../components/projects/task.ejs') %>
+          <%- include('../components/projects/task.ejs') %>
+          <%- include('../components/projects/task.ejs') %>
+          <%- include('../components/projects/task.ejs') %>
+        </div>
       </section>
-      <%- include('../components/projects/details_bar.ejs', {project}) %>
+      <%- include('../components/projects/details_bar.ejs', {project, user}) %>
     </main>
   </body>
 </html>
