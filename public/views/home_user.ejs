@@ -11,7 +11,7 @@
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs', {firstName}) %>
       <div class="container mt-5 content overflow-y-auto overflow-x-hidden">
-        <%- include('../components/actionbar.ejs', {firstName}) %>
+        <%- include('../components/actionbar.ejs', {firstName, context: 'user', page: 'home'}) %>
         <h3>Home</h3>
         <hr>
     </main>

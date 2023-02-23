@@ -12,7 +12,16 @@ router.get("/:id", async (req, res) => {
   res.render(path.join(__dirname + "/../public/views/project"), {
     loggedIn: req.session.loggedIn,
     firstName: req.session.user.firstName,
-    project,
+    project
+  });
+});
+
+router.get("/:id/tasks", async (req, res) => {
+  let [project] = await getProjectDetails(req.params.id);
+  res.render(path.join(__dirname + "/../public/views/tasks"), {
+    loggedIn: req.session.loggedIn,
+    firstName: req.session.user.firstName,
+    project
   });
 });
 

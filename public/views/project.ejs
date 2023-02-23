@@ -10,7 +10,7 @@
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
       <section id="announcements" class="container mt-5">
-        <%- include('../components/actionbar.ejs', {projects: true}) %>
+        <%- include('../components/actionbar.ejs', {context: 'project', page: 'project', project}) %>
         <h3 class="mt-4">
           Project Updates
           <hr />
