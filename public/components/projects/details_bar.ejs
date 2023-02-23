@@ -1,3 +1,4 @@
+<% let progressBarWidth = `style= "width: ${project.progress}%"`%>
 <div class="col-2 bg-dark d-flex flex-column">
   <div class="d-flex w-100 mb-3">
     <button class="btn btn-dark rounded-0 w-50 text-leaf-green">Project</button>
@@ -13,6 +14,6 @@
   </div>
   <img src="../../images/stock.jpg" alt="project image" class="mx-auto" style="width: 90%;">
   <div class="progress mt-auto mb-3 mx-auto" role="progressbar" aria-label="project progress" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 1.5rem; width: 90%;">
-    <div class="progress-bar bg-success" style="width: 25%">25%</div>
+    <div class="progress-bar bg-success" <%- progressBarWidth %>><%- project.progress %></div>
   </div>
 </div>
