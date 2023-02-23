@@ -10,7 +10,7 @@
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
       <div class="container mt-5 content overflow-y-auto overflow-x-hidden">
-        <%- include('../components/actionbar.ejs', {firstName}) %>
+        <%- include('../components/actionbar.ejs', {firstName, context: 'user', page: 'projects'}) %>
         <!-- Commented this section out temporarily until backend is set up -->
 
         <!-- <h3>Recent Projects</h3> -->
@@ -26,13 +26,13 @@
         <div class="d-flex gap-4 py-2 mb-4 content overflow-x-auto">
           <% for (let project of projects) { if (project.teamId == null) {%> <%-
           include('../components/projects/project_card.ejs', {projectName:
-          project.projectName, firstName: firstName, private: true}) %> <% }} %>
+          project.projectName, firstName: firstName, private: true, projectId: project.projectId}) %> <% }} %>
         </div>
         <h3>Team Projects</h3>
         <hr />
         <% for (let project of projects) { if (project.teamId != null) {%> <%-
         include('../components/projects/project_card.ejs', {projectName:
-        project.projectName, teamName: project.teamName}) %> <% }} %>
+        project.projectName, teamName: project.teamName, projectId: project.projectId}) %> <% }} %>
       </div>
     </main>
   </body>

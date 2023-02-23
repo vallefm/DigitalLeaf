@@ -1,20 +1,79 @@
-<div class="col-2 bg-dark d-flex flex-column">
+<% let progressBarWidth = `style= "width: ${project.progress}%"`%>
+<div class="col-2 bg-dark d-flex flex-column pb-2">
   <div class="d-flex w-100 mb-3">
     <button class="btn btn-dark rounded-0 w-50 text-leaf-green">Project</button>
     <button class="btn btn-dark rounded-0 w-50">Team</button>
   </div>
   <div class="card border-0 mx-auto">
     <div class="card-body bg-dark text-light">
-      <h2>Project Name</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat a totam
-        maiores neque vel atque facere ea, quos, amet aut, explicabo minima
-        quidem. Quisquam molestias rerum modi maiores nisi est.
-      </p>
+      <h2><%- project.name %></h2>
+      <p><%- project.description %></p>
     </div>
   </div>
-  <img src="../../images/stock.jpg" alt="project image" class="mx-auto" style="width: 90%;">
-  <div class="progress mt-auto mb-3 mx-auto" role="progressbar" aria-label="project progress" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 1.5rem; width: 90%;">
-    <div class="progress-bar bg-success" style="width: 25%">25%</div>
+  <img
+    src="../../images/stock.jpg"
+    alt="project image"
+    class="mx-auto"
+    style="width: 90%"
+  />
+  <div
+    class="progress mt-auto mb-3 mx-auto"
+    role="progressbar"
+    aria-label="project progress"
+    aria-valuenow="25"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    style="height: 1.5rem; width: 90%"
+  >
+    <div class="progress-bar bg-success" <%- progressBarWidth %>
+      ><%- project.progress %>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-dark rounded-0"
+    data-bs-toggle="modal"
+    data-bs-target="#projectSettingsModal"
+  >
+    Project Settings
+  </button>
+
+  <div
+    class="modal fade"
+    id="projectSettingsModal"
+    tabindex="-1"
+    aria-labelledby="projectSettingsModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="projectSettingsLabel">
+            Delete Project?
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-center text-danger">
+          <strong>This action can not be undone.</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <a
+            href="/project/<%- project.id %>"
+            class="btn btn-outline-danger"
+            onclick="alert(`No, I won't let you do that. So, hit the OK button and think about what you've done.`)"
+            >Yes, delete this project forever.</a
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </div>
