@@ -23,13 +23,16 @@ async function getProjectDetails(projectId) {
   return result;
 }
 
-// NOT TESTED, do not use until tested.
-async function createProject(projectName, description) {
+async function createProject(projectName, description, dueDate, creatorId) {
   let newProjectId = createProjectID()
+  description == '' ? description = null : description
+  dueDate == '' ? dueDate = null : dueDate 
+  let teamId = null
   try {
-    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, 0, null, creatorId ])
+    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, 0, teamId, dueDate, creatorId])
     return true
   } catch (error) {
+    console.log(error);
     return false
   }
 }
@@ -37,7 +40,7 @@ async function createProject(projectName, description) {
 function createProjectID() {
   let prefix = 'prj'
   let projectId = prefix+randomId()
-  while (checkProjectExists(projectId)){
+  while (!checkProjectExists(projectId)){
     projectId = prefix+randomId()
   }
   return projectId

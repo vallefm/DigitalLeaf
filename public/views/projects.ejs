@@ -10,7 +10,8 @@
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
       <div class="container mt-5 content overflow-y-auto overflow-x-hidden">
-        <%- include('../components/actionbar.ejs', {firstName, context: 'user', page: 'projects'}) %>
+        <%- include('../components/actionbar.ejs', {firstName, context: 'user',
+        page: 'projects'}) %>
         <!-- Commented this section out temporarily until backend is set up -->
 
         <!-- <h3>Recent Projects</h3> -->
@@ -19,20 +20,69 @@
 
         <div class="d-flex justify-content-between">
           <h3>My Projects</h3>
-          <a href="../create_project" class="btn btn-dark">Create Project</a>
+          <button
+            class="btn btn-dark d-flex align-items-center gap-1"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">
+            <i class="bi bi-plus-lg"></i>
+            Create Project
+          </button>
         </div>
 
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                  Create New Project
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="/<%-firstName%>/projects/create" method="post">
+                <div class="modal-body d-flex flex-column gap-2">
+                    <input type="text" name="projectName" id="projectName" placeholder="Project Name*" class="form-control" required>
+                    <textarea name="description" id="Description" placeholder="Description (max: 255)" class="form-control" maxlength="255"></textarea>
+                    <div>
+                      <label for="dueDate" class="text-secondary">Due Date:</label>
+                      <input type="date" name="dueDate" id="dueDate" class="form-control text-secondary">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-success">
+                    Create
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
         <hr />
+
         <div class="d-flex gap-4 py-2 mb-4 content overflow-x-auto">
           <% for (let project of projects) { if (project.teamId == null) {%> <%-
           include('../components/projects/project_card.ejs', {projectName:
-          project.projectName, firstName: firstName, private: true, projectId: project.projectId}) %> <% }} %>
+          project.projectName, firstName: firstName, private: true, projectId:
+          project.projectId}) %> <% }} %>
         </div>
         <h3>Team Projects</h3>
         <hr />
         <% for (let project of projects) { if (project.teamId != null) {%> <%-
         include('../components/projects/project_card.ejs', {projectName:
-        project.projectName, teamName: project.teamName, projectId: project.projectId}) %> <% }} %>
+        project.projectName, teamName: project.teamName, projectId:
+        project.projectId}) %> <% }} %>
       </div>
     </main>
   </body>
