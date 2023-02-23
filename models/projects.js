@@ -23,42 +23,60 @@ async function getProjectDetails(projectId) {
   return result;
 }
 
+// NOT TESTED, do not use until tested.
 async function createProject(projectName, description) {
   let newProjectId = createProjectID()
-  let setProgress = 0
-  let teamId = 'placeholder'
-  let creatorId = 'placeholder'
   try {
-    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, setProgress, teamId, creatorId ])
+    await conn.query("INSERT INTO projects VALUES (?, ?, ?, ?, ?, ?, NOW())", [newProjectId, projectName, description, 0, null, creatorId ])
     return true
   } catch (error) {
     return false
   }
-
 }
 
 function createProjectID() {
-  let projectId = 'prj'+randomId()
-  while (!checkIdExists(projectId)){
-    projectId = 'prj'+randomId()
+  let prefix = 'prj'
+  let projectId = prefix+randomId()
+  while (checkProjectExists(projectId)){
+    projectId = prefix+randomId()
   }
   return projectId
 }
 
-async function checkIdExists(id) {
-  let exists = false
-  let [countData] = await conn.query("SELECT COUNT(*) as count FROM users WHERE id = ?", [id])
+async function checkProjectExists(projectId) {
+  let [countData] = await conn.query("SELECT COUNT(*) as count FROM projects WHERE id = ?", [projectId])
   let count = countData[0]["count"]
   if (count != 0) {
-      return false;
+      return true;
   }
-  return true
+  return false
 }
 
-// generic 8-digit random id generator. Prepend relevant 3-letter tag to create complete id (usr for users, tsk for task, etc.) 
+async function deleteProject(projectId) {
+  if(checkProjectExists(projectId)){
+  try {
+    await conn.query("delete FROM projects WHERE id = ? limit 1", [projectId])
+    return true
+  } catch (error) {
+    return false
+  }
+  }
+}
+
+
+/**  generic random number generator up to 9-digits for id creation. Prepend relevant 3-letter tag to create complete id.
+ * users: usr
+ * teams: tem
+ * projects: prj
+ * tasks: tsk
+ * subtask: stk
+ * announcements: anc
+ * message(for inbox): msg
+ */
+
 function randomId() {
-  let id = Math.round(Math.random()*10000000)
+  let id = Math.round(Math.random()*100000000)
   return id.toString();
 }
 
-export { createProject, getUserProjects, getProjectDetails};
+export { createProject, getUserProjects, getProjectDetails, deleteProject};

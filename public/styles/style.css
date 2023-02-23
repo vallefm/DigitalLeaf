@@ -1,5 +1,5 @@
 :root {
-  --leaf-green: rgb(0, 185, 0);
+  --leaf-green: hsl(120, 100%, 36%);
 }
 
 body {
@@ -16,6 +16,26 @@ body {
 }
 .content::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+.task details summary {
+  list-style: none;
+}
+.task details summary:hover {
+  background-color: hsla(120deg, 100%, 36%, 0.1);
+}
+.task details summary::-webkit-details-marker {
+  display: none;
+}
+.task details[open] {
+  margin-bottom: 1rem;
+}
+.task details[open] summary {
+  border-radius: 0;
+  background-color: hsla(120deg, 100%, 36%, 0.1);
+}
+.task details[open] summary:hover {
+  box-shadow: none;
 }
 
 .logo-small {
