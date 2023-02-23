@@ -13,7 +13,6 @@ import { userRouter } from "./routes/user.js";
 import { projectRouter } from "./routes/project.js"
 import { teamRouter } from "./routes/team.js";
 import { scheduleRouter } from "./routes/schedule.js";
-import { createProjectRouter } from "./routes/create_project.js";
 import { inboxRouter } from "./routes/inbox.js";
 
 const app = express();
@@ -49,7 +48,6 @@ app.use("/project/", projectRouter)
 app.use("/schedule", scheduleRouter)
 app.use("/inbox", inboxRouter)
 app.use("/logout", logoutRouter)
-app.use("/create_project", createProjectRouter)
 
 // Home route
 app.get("/", (req, res) => {

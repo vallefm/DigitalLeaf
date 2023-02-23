@@ -52,6 +52,7 @@ async function createUser(firstName, lastName, email, password) {
         await conn.query("INSERT INTO users VALUES (?, ?, ?, ?, ?, NOW())", [newId, firstName, lastName, email, encryptedPass])
         return true
     } catch (error) {
+        console.log(error);
         return false
     }
 }
@@ -65,7 +66,6 @@ function createUserID() {
 }
 
 async function checkIdExists(id) {
-    let exists = false
     let [countData] = await conn.query("SELECT COUNT(*) as count FROM users WHERE id = ?", [id])
     let count = countData[0]["count"]
     if (count != 0) {
