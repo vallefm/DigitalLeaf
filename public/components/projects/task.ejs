@@ -1,6 +1,6 @@
 <div class="task">
   <details class="card">
-    <summary class="p-2">Task Head Example</summary>
+    <summary class="p-2"><%- task.name %></summary>
     <div class="card-body p-2">
         <div class="d-flex gap-4">
             <div>
@@ -9,7 +9,7 @@
             </div>
             <div>
                 <i class="bi bi-calendar"></i>
-                Due: 2/31/23
+                Due: <%- task.due_date %>
             </div>
         </div>
     </div>

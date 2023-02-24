@@ -9,21 +9,62 @@
     </header>
     <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
       <%- include('../components/sidebar.ejs') %>
-      <section id="announcements" class="container mt-5">
+      <section id="updates" class="container mt-5">
         <%- include('../components/actionbar.ejs', {context: 'project', page: 'project', project}) %>
         <div class="d-flex justify-content-between mt-4">
           <h3>Project Updates</h3>
-          <a href="/project/<%-project.id %>" class="btn btn-dark d-flex align-items-center gap-1"><i class="bi bi-plus-lg"></i>Add Update</a>
+          <button
+            class="btn btn-dark d-flex align-items-center gap-1"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">
+            <i class="bi bi-plus-lg"></i>
+            Update
+          </button>
         </div>
         <hr>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                  Update
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="/project/<%- project.id %>/update" method="post">
+                <div class="modal-body d-flex flex-column gap-2">
+                    <input type="text" name="header" id="header" placeholder="Header*" class="form-control" maxlength="50" required>
+                    <textarea name="content" id="content" placeholder="Content (max: 2500)" class="form-control" maxlength="2500" required></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-success">
+                    Create
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
         <div class="content overflow-y-auto" style="height: 80%;">
-          <%- include('../components/projects/announcement.ejs') %>
-          <%- include('../components/projects/announcement.ejs') %>
-          <%- include('../components/projects/announcement.ejs') %>
-          <%- include('../components/projects/announcement.ejs') %>
-          <%- include('../components/projects/announcement.ejs') %>
-          <%- include('../components/projects/announcement.ejs') %>
-          <%- include('../components/projects/announcement.ejs') %>
+          <% for(let update of updates){ %>
+            <% update.created_at = String(update.created_at).split(' ').splice(1,4).join(' ') %>
+            <%- include('../components/projects/update.ejs', {update}) %>
+          <% } %>
         </div>
       </section>
       <%- include('../components/projects/details_bar.ejs', {project, user}) %>
