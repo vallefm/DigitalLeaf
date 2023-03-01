@@ -89,16 +89,56 @@ async function getProjectUpdates(projectId) {
   return result;
 }
 
+async function getUpdate(updateId) {
+  let [result] = await conn.query(
+    "select * from projects_updates where id = ?",
+    [updateId]
+  );
+  return result;
+}
+
 async function createProjectUpdate(projectId, userId, header, content) {
+  let newUpdateId = createUpdateId(updatePrefix)
   try {
     await conn.query(
-      "INSERT INTO projects_updates VALUES (?, ?, ? , ?, NOW())",
-      [projectId, userId, header, content]
+      "INSERT INTO projects_updates VALUES (?, ?, ?, ? , ?, NOW())",
+      [newUpdateId, projectId, userId, header, content]
     );
     return true;
   } catch (error) {
     console.log(error);
     return false;
+  }
+}
+
+function createUpdateId(prefix) {
+  let updateId = prefix + randomId();
+  while (!checkUpdateIdExists(updateId)) {
+    updateId = prefix + randomId();
+  }
+  return updateId;
+}
+
+async function checkUpdateIdExists(updateId) {
+  let [countData] = await conn.query(
+    "SELECT COUNT(*) as count FROM projects_updates WHERE id = ?",
+    [updateId]
+  );
+  let count = countData[0]["count"];
+  if (count != 0) {
+    return true;
+  }
+  return false;
+}
+
+async function deleteUpdate(updateId) {
+  if (checkUpdateIdExists(updateId)) {
+    try {
+      await conn.query("delete FROM projects_updates WHERE id = ? limit 1", [updateId]);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }
 
@@ -117,14 +157,15 @@ async function getTask(taskId) {
   return result;
 }
 
-async function createTask(title, dueDate, creatorId, projectId) {
+async function createTask(title, details, dueDate,creatorId, projectId) {
   let newTaskId = createTaskId(taskPrefix);
   try {
-    await conn.query("INSERT INTO tasks VALUES (?, ?, ? , ?, ?, ?, NOW())", [
+    await conn.query("INSERT INTO tasks VALUES (?, ?, ?, ?, ?, ?, ?, NOW())", [
       newTaskId,
       title,
       dueDate,
       "new",
+      details,
       creatorId,
       projectId,
     ]);
@@ -172,7 +213,7 @@ async function deleteTask(taskId) {
  * projects: prj
  * tasks: tsk
  * subtask: stk
- * update: upd
+ * updates: upd
  * announcements: anc
  * message(for inbox): msg
  */
@@ -191,5 +232,8 @@ export {
   createProjectUpdate,
   getProjectTasks,
   createTask,
-  getTask
+  getTask,
+  deleteTask,
+  getUpdate,
+  deleteUpdate
 };

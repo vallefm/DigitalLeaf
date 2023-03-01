@@ -5,10 +5,13 @@ import {
   getProjectDetails,
   deleteProject,
   getProjectUpdates,
+  getUpdate,
   createProjectUpdate,
+  deleteUpdate,
   getProjectTasks,
   createTask,
-  getTask
+  getTask,
+  deleteTask
 } from "../models/projects.js";
 
 const router = express.Router();
@@ -30,6 +33,21 @@ router.get("/:id", async (req, res) => {
   });
 });
 
+// Delete project
+router.get("/:id/delete", async (req, res) => {
+  let [project] = await getProjectDetails(req.params.id);
+  let user = req.session.user;
+  if (user.id == project.creator_id) {
+    if (await deleteProject(project.id)) {
+      res.status(410).redirect(`/${user.firstName}/projects`);
+    } else {
+      res.status(404).redirect(`/${user.firstName}/projects`);
+    }
+  } else {
+    res.status(401).redirect(`/${user.firstName}/projects`);
+  }
+});
+
 // Updates
 router.post('/:id/update', async (req, res) => {
   let {header, content} = req.body
@@ -37,6 +55,20 @@ router.post('/:id/update', async (req, res) => {
       res.status(201).redirect(`/project/${req.params.id}`)
   } 
 })
+
+router.get("/:id/update/:updateId/delete", async (req, res) => {
+  let [update] = await getUpdate(req.params.updateId)
+  let user = req.session.user;
+  if (user.id == update.user_id) {
+    if (await deleteUpdate(update.id)) {
+      res.status(410).redirect(`/project/${req.params.id}`);
+    } else {
+      res.status(404).redirect(`/project/${req.params.id}`);
+    }
+  } else {
+    res.status(401).redirect(`/project/${req.params.id}`);
+  }
+});
 
 // Tasks
 router.get("/:id/tasks", async (req, res) => {
@@ -54,8 +86,8 @@ router.get("/:id/tasks", async (req, res) => {
 });
 
 router.post('/:id/tasks', async (req, res) => {
-  let {title, dueDate} = req.body
-  if(await createTask(title, dueDate, req.session.user.id, req.params.id)){
+  let {title, details, dueDate} = req.body
+  if(await createTask(title, details, dueDate, req.session.user.id, req.params.id)){
       res.status(201).redirect(`/project/${req.params.id}/tasks`)
   } 
 })
@@ -63,7 +95,7 @@ router.post('/:id/tasks', async (req, res) => {
 router.get("/:id/tasks/:taskid", async (req, res) => {
   let [project] = await getProjectDetails(req.params.id);
   let tasks = await getProjectTasks(req.params.id);
-  let task = await getTask(req.params.taskid)
+  let [task] = await getTask(req.params.taskid)
   let user = req.session.user;
   res.render(path.join(__dirname + "/../public/views/tasks"), {
     loggedIn: req.session.loggedIn,
@@ -76,23 +108,20 @@ router.get("/:id/tasks/:taskid", async (req, res) => {
   });
 });
 
-
-
-// delete task
-
-// Delete project
-router.get("/:id/delete", async (req, res) => {
-  let [project] = await getProjectDetails(req.params.id);
+//delete task
+router.get("/:id/tasks/:taskid/delete", async (req, res) => {
+  let [task] = await getTask(req.params.taskid)
   let user = req.session.user;
-  if (user.id == project.creator_id) {
-    if (await deleteProject(project.id)) {
-      res.status(410).redirect(`/${user.firstName}/projects`);
+  if (user.id == task.creator_id) {
+    if (await deleteTask(task.id)) {
+      res.status(410).redirect(`/project/${req.params.id}/tasks`);
     } else {
-      res.status(404).redirect(`/${user.firstName}/projects`);
+      res.status(404).redirect(`/project/${req.params.id}/tasks`);
     }
   } else {
-    res.status(401).redirect(`/${user.firstName}/projects`);
+    res.status(401).redirect(`/project/${req.params.id}/tasks`);
   }
 });
+
 
 export { router as projectRouter };

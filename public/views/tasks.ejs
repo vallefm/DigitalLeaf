@@ -18,7 +18,7 @@
             class="btn btn-dark d-flex align-items-center gap-1"
             type="button"
             data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop">
+            data-bs-target="#Backdrop">
             <i class="bi bi-plus-lg"></i>
             Create Task
           </button>
@@ -28,17 +28,16 @@
         <!-- Modal -->
         <div
           class="modal fade"
-          id="staticBackdrop"
-          data-bs-backdrop="static"
+          id="Backdrop"
           data-bs-keyboard="false"
           tabindex="-1"
-          aria-labelledby="staticBackdropLabel"
+          aria-labelledby="BackdropLabel"
           aria-hidden="true"
         >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                <h1 class="modal-title fs-5" id="BackdropLabel">
                   Create Task
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -46,6 +45,7 @@
               <form action="/project/<%- project.id %>/tasks" method="post">
                 <div class="modal-body d-flex flex-column gap-2">
                     <input type="text" name="title" id="title" placeholder="Task Title*" class="form-control" maxlength="50" required>
+                    <textarea type="text" name="details" id="details" placeholder="Details (max: 1000)" class="form-control" maxlength="1000"></textarea>
                     <div class="mt-2">
                       <label for="dueDate" class="text-secondary">Due Date:</label>
                       <input type="date" name="dueDate" id="dueDate" class="form-control text-secondary">

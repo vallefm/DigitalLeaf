@@ -94,17 +94,59 @@
     <div class="card border-0 mx-auto">
       <div class="card-body bg-dark text-light">
         <h2><%- task.name %></h2>
-        <p><%# task.description #%></p>
+        <p><%- task.details %></p>
       </div>
     </div>
-    <img
-      src="../../images/stock.jpg"
-      alt="project image"
-      class="mx-auto"
-      style="width: 90%"
-    />
+    <button
+    type="button"
+    class="btn btn-dark rounded-0 mt-auto"
+    data-bs-toggle="modal"
+    data-bs-target="#projectSettingsModal"
+  >
+    Task Settings
+  </button>
 
-    <a href="/project/<%- project.id %>/tasks" class="mt-auto">
+  <div
+    class="modal fade"
+    id="projectSettingsModal"
+    tabindex="-1"
+    aria-labelledby="projectSettingsModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="projectSettingsLabel">
+            Delete Task?
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-center text-danger">
+          <strong>This action can not be undone.</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <a
+            <%if (user.id == task.creator_id) {%>
+              href="/project/<%- project.id %>/tasks/<%- task.id %>/delete"
+            <% } else { %>
+              href="/project/<%- project.id %>/tasks"
+              <% } %>
+            class="btn btn-outline-danger">
+            Yes, delete this task forever.
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+    <a href="/project/<%- project.id %>/tasks">
       <button type="button" class="btn btn-dark rounded-0 w-100">
         Close Task
       </button>
