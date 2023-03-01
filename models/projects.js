@@ -89,14 +89,12 @@ async function getProjectUpdates(projectId) {
   return result;
 }
 
-async function createProjectUpdate(projectId, userId ,header, content) {
+async function createProjectUpdate(projectId, userId, header, content) {
   try {
-    await conn.query("INSERT INTO projects_updates VALUES (?, ?, ? , ?, NOW())", [
-      projectId,
-      userId,
-      header,
-      content,
-    ]);
+    await conn.query(
+      "INSERT INTO projects_updates VALUES (?, ?, ? , ?, NOW())",
+      [projectId, userId, header, content]
+    );
     return true;
   } catch (error) {
     console.log(error);
@@ -112,6 +110,13 @@ async function getProjectTasks(projectId) {
   return result;
 }
 
+async function getTask(taskId) {
+  let [result] = await conn.query("select * from tasks where id = ? limit 1", [
+    taskId,
+  ]);
+  return result;
+}
+
 async function createTask(title, dueDate, creatorId, projectId) {
   let newTaskId = createTaskId(taskPrefix);
   try {
@@ -119,9 +124,9 @@ async function createTask(title, dueDate, creatorId, projectId) {
       newTaskId,
       title,
       dueDate,
-      'new',
+      "new",
       creatorId,
-      projectId
+      projectId,
     ]);
     return true;
   } catch (error) {
@@ -153,9 +158,7 @@ async function checkTaskIdExists(taskId) {
 async function deleteTask(taskId) {
   if (checkTaskIdExists(taskId)) {
     try {
-      await conn.query("delete FROM tasks WHERE id = ? limit 1", [
-        taskId,
-      ]);
+      await conn.query("delete FROM tasks WHERE id = ? limit 1", [taskId]);
       return true;
     } catch (error) {
       return false;
@@ -187,5 +190,6 @@ export {
   getProjectUpdates,
   createProjectUpdate,
   getProjectTasks,
-  createTask
+  createTask,
+  getTask
 };

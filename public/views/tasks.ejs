@@ -67,11 +67,15 @@
         <div class="content overflow-y-auto" style="height: 80%;">
           <% for (let task of tasks) { %>
             <% task.due_date = String(task.due_date).split(' ').splice(1,3).join(' ') %>
-            <%- include('../components/projects/task.ejs', {task}) %>
+            <%- include('../components/projects/task.ejs', {task, project}) %>
           <% } %>
         </div>
       </section>
-      <%- include('../components/projects/details_bar.ejs', {project, user}) %>
+      <% if (locals.task) {%>
+        <%- include('../components/projects/details_bar.ejs', {project, user, context, task}) %>
+      <% } else { %>
+        <%- include('../components/projects/details_bar.ejs', {project, user, context}) %>
+      <% } %>
     </main>
   </body>
 </html>

@@ -1,4 +1,6 @@
 <% let progressBarWidth = `style= "width: ${project.progress}%"`%>
+
+<% if (context == 'project') {%>
 <div class="col-2 bg-dark d-flex flex-column pb-2">
   <div class="d-flex w-100 mb-3">
     <button class="btn btn-dark rounded-0 w-50 text-leaf-green">Project</button>
@@ -83,3 +85,29 @@
     </div>
   </div>
 </div>
+<% } else if (context == 'task') {%>
+  <div class="col-2 bg-dark d-flex flex-column pb-2">
+    <div class="d-flex w-100 mb-3">
+      <button class="btn btn-dark rounded-0 w-50 text-leaf-green">Task</button>
+      <button class="btn btn-dark rounded-0 w-50">Assigned</button>
+    </div>
+    <div class="card border-0 mx-auto">
+      <div class="card-body bg-dark text-light">
+        <h2><%- task.name %></h2>
+        <p><%# task.description #%></p>
+      </div>
+    </div>
+    <img
+      src="../../images/stock.jpg"
+      alt="project image"
+      class="mx-auto"
+      style="width: 90%"
+    />
+
+    <a href="/project/<%- project.id %>/tasks" class="mt-auto">
+      <button type="button" class="btn btn-dark rounded-0 w-100">
+        Close Task
+      </button>
+    </a>
+  </div>
+<% } %>

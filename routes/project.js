@@ -7,7 +7,8 @@ import {
   getProjectUpdates,
   createProjectUpdate,
   getProjectTasks,
-  createTask
+  createTask,
+  getTask
 } from "../models/projects.js";
 
 const router = express.Router();
@@ -24,7 +25,8 @@ router.get("/:id", async (req, res) => {
     firstName: req.session.user.firstName,
     user,
     project,
-    updates
+    updates,
+    context: 'project'
   });
 });
 
@@ -46,7 +48,8 @@ router.get("/:id/tasks", async (req, res) => {
     firstName: req.session.user.firstName,
     project,
     user,
-    tasks
+    tasks,
+    context: 'project'
   });
 });
 
@@ -56,6 +59,24 @@ router.post('/:id/tasks', async (req, res) => {
       res.status(201).redirect(`/project/${req.params.id}/tasks`)
   } 
 })
+
+router.get("/:id/tasks/:taskid", async (req, res) => {
+  let [project] = await getProjectDetails(req.params.id);
+  let tasks = await getProjectTasks(req.params.id);
+  let task = await getTask(req.params.taskid)
+  let user = req.session.user;
+  res.render(path.join(__dirname + "/../public/views/tasks"), {
+    loggedIn: req.session.loggedIn,
+    firstName: req.session.user.firstName,
+    project,
+    user,
+    tasks,
+    task,
+    context: 'task'
+  });
+});
+
+
 
 // delete task
 
