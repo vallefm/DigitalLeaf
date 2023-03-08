@@ -1,4 +1,5 @@
 .env
+node_modules
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
