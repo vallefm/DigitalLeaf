@@ -207,6 +207,37 @@ async function deleteTask(taskId) {
   }
 }
 
+//Teams
+async function checkIfUserExists(userId) {
+  let [countData] = await conn.query(
+    "SELECT COUNT(*) as count FROM users WHERE id = ?",
+    [userId]
+  );
+  let count = countData[0]["count"];
+  if (count != 0) {
+    return true;
+  }
+  return false;
+}
+
+async function addTeamMember(projectId, userId) {
+  if (checkProjectExists(projectId)) {
+    try {
+      await conn.query(
+        "INSERT INTO project_users VALUES (?, ?) "
+        [projectId, userId]
+        );
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+}
+
+function removeTeamMember() {}
+
+
+
 /**  generic random number generator up to 9-digits for id creation. Prepend relevant 3-letter tag to create complete id.
  * users: usr
  * teams: tem
@@ -235,5 +266,7 @@ export {
   getTask,
   deleteTask,
   getUpdate,
-  deleteUpdate
+  deleteUpdate,
+  checkIfUserExists,
+  addTeamMember
 };

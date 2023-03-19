@@ -24,4 +24,8 @@ router.post('/projects/create', async (req, res) => {
     } 
 })
 
+router.get('/team', async (req, res) => {
+    res.render(path.join(__dirname+'/../public/views/team'), {loggedIn: req.session.loggedIn, firstName: req.session.user.firstName})
+})
+
 export {router as userRouter}
