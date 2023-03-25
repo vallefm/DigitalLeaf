@@ -10,15 +10,27 @@ namespace DigitalLeaf.tests.PageObjects
 
     public class SignUpPage : BasePage 
     {
-        private static readonly By someVariable = By.XPath("//*[contains(text(), 'KEYWORD')]");
-        
+        private static readonly By createAccountButton = By.XPath("//button[contains(text(), 'Create Account')]");
+        private static readonly By emailInputBox = By.XPath("//input[@id = 'email']");
+        private static readonly By firstNameInputBox = By.XPath("//input[@id = 'firstName']");
+        private static readonly By lastNameInputBox = By.XPath("//input[@id = 'lastName']");
+        private static readonly By paswordInputBox = By.XPath("//input[@id = 'password']");
+        private static readonly By confirmPasswordInputBox = By.XPath("//input[@id = 'confirmPassword']");
+
         /// <summary>
         /// Sign Up Page constructor 
         /// <summary>
-        public SignUpPage(IWebDriver driver, string url) : base(driver)
+        public SignUpPage(IWebDriver driver) : base(driver)
         {
-            Driver.Navigate().GoToUrl(url);
-            Driver.WaitForElement(someVariable);
+            Driver.WaitForElement(createAccountButton);
+        }
+
+        /// <summary>
+        /// Completes Registration for a new user. 
+        /// <summary>
+        public void RegisterNewUser()
+        {
+                
         }
     }
 }

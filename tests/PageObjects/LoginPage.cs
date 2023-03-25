@@ -14,7 +14,7 @@ namespace DigitalLeaf.tests.PageObjects
         private static readonly By forgotYourPasswordLink = By.XPath("//a[contains(text(), 'Forgot your password')]");
         private static readonly By signUpLink = By.XPath("//a[contains(text(),'Sign up')]");
         private static readonly By logInButton = By.XPath("//button[contains(text(),'Log In')]");
-
+        
         /// <summary>
         /// Login Page constructor 
         /// <summary>
@@ -22,6 +22,15 @@ namespace DigitalLeaf.tests.PageObjects
         {
             Driver.Navigate().GoToUrl(url);
             Driver.WaitForElement(emailInputBox);
+        }
+        
+        /// <summary>
+        /// Navigates to the Sign Up page from the login page.
+        /// <summary>
+        public SignUpPage ClickSignUpLink()
+        {
+            Driver.FindElement(signUpLink).Click();
+            return new SignUpPage(Driver);
         }
 
         /// <summary>
