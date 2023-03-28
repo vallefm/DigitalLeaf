@@ -15,9 +15,9 @@
                 <div class="d-flex justify-content-between">
                     <h3>Search for Team Members</h3>
                     <br/>
-                    <p>Search for users by their First Name or Email</p>
+                    <p>Search for users by their Email</p>
                     <br/>
-                    <form action="<%-firstName%>/teams">
+                    <form action="/search/<%-searchUser%>" method="get">
                         <label for="searchUser">Enter Search Here:</label>
                         <input type="search" id="searchUser" name="searchUser">
                         <button type="submit" class="btn btn-primary">Search</button>
@@ -27,8 +27,8 @@
                 <!--Should be changed to facilitate team search and card creation-->
                 <div class="d-flex gap-4 py-2 mb-4 content overflow-x-auto">
                     <% for (let team of teams ) { if (team.firstName != null) {%> <%-
-                        include('../components/teams/team_card.ejs', {userEmail:
-                        userEmail, firstName: firstName, lastName: lastName}) %> <% }} %>
+                        include('../components/teams/team_card.ejs', {searchUser:
+                        searchUser, firstName: firstName, lastName: lastName}) %> <% }} %>
                 </div>
 
 
