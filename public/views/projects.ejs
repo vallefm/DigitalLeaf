@@ -77,8 +77,8 @@
           project.projectName, firstName: firstName, private: true, projectId:
           project.projectId}) %> <% }} %>
         </div>
-        <h3>Team Projects</h3>
-        <hr />
+        <h3>Group Projects</h3>
+        <hr /> 
         <% for (let project of projects) { if (project.teamId != null) {%> <%-
         include('../components/projects/project_card.ejs', {projectName:
         project.projectName, teamName: project.teamName, projectId:

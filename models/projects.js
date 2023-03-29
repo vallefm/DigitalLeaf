@@ -11,7 +11,7 @@ const taskPrefix = "tsk";
 
 async function getUserProjects(userId) {
   let [result] = await conn.query(
-    "select projects_users.project_id as projectId, projects.name as projectName, projects.team_id as teamId, teams.name as teamName\
+    "select projects_users.project_id as projectId, projects.name as projectName, projects.team_id as teamId, projects.creator_id as creatorId, teams.name as teamName\
     from projects_users join projects \
     on projects_users.project_id = projects.id left join teams\
     on projects.team_id = teams.id\
@@ -207,6 +207,23 @@ async function deleteTask(taskId) {
   }
 }
 
+//Add Team Member
+
+async function addProjectMember(projectId, userId) {
+    try {
+      await conn.query(
+        "INSERT INTO projects_users VALUES (?, ?)",
+        [projectId, userId]
+        );
+      return true;
+    } catch (error) {
+      console.log (error)
+      return false;
+    }
+}
+
+
+
 /**  generic random number generator up to 9-digits for id creation. Prepend relevant 3-letter tag to create complete id.
  * users: usr
  * teams: tem
@@ -235,5 +252,6 @@ export {
   getTask,
   deleteTask,
   getUpdate,
-  deleteUpdate
+  deleteUpdate,
+  addProjectMember
 };
