@@ -17,7 +17,7 @@
                     <br/>
                     <p>Search for users by their Email</p>
                     <br/>
-                    <form action="/search/<%-searchUser%>" method="get">
+                    <form action="/search/<%-projectId%>/searchUsers" method="post">
                         <label for="searchUser">Enter Search Here:</label>
                         <input type="search" id="searchUser" name="searchUser">
                         <button type="submit" class="btn btn-primary">Search</button>
@@ -26,9 +26,9 @@
 
                 <!--Should be changed to facilitate team search and card creation-->
                 <div class="d-flex gap-4 py-2 mb-4 content overflow-x-auto">
-                    <% for (let team of teams ) { if (team.firstName != null) {%> <%-
-                        include('../components/teams/team_card.ejs', {searchUser:
-                        searchUser, firstName: firstName, lastName: lastName}) %> <% }} %>
+                    <% if (locals.searchUsers) {
+                    for (let user of searchUsers ) { {%> <%-
+                        include('../components/teams/search_card.ejs', {user}) %> <% }} } %>
                 </div>
 
 
