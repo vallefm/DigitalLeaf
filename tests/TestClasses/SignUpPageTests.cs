@@ -5,20 +5,59 @@ using FluentAssertions;
 namespace DigitalLeaf.tests.TestClasses
 {
     /// <summary>
-    /// Digital Leaf Login Page Quality Tests 
+    /// Digital Leaf Sign Up Page Quality Tests 
     /// </summary>
     [TestClass]
     public class SignUpPageTests : DigitalLeafBaseTest
     {
+        static string baseUrl = "http://localhost:8080/login";
+        
+        [TestMethod]
+        public void SignUpHeaderTest()
+        {
+            /// Test set up 
+            using var driver = GetWebDriver();
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
+
+            /// Begin Check
+            signUpPage.HasSignUpHeader().Should().BeTrue();
+        }
+
         [TestMethod]
         public void EmailInputBoxTest()
         {
             /// Test set up 
             using var driver = GetWebDriver();
-            LoginPage loginPage = new LoginPage(driver, "http://127.0.0.1:5500/public/views/login.html");
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
 
             /// Begin Check
-            loginPage.HasEmailInputBox().Should().BeTrue();
+            signUpPage.HasEmailInputBox().Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void FirstNameInputBoxTest()
+        {
+            /// Test set up 
+            using var driver = GetWebDriver();
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
+
+            /// Begin Check
+            signUpPage.HasFirstNameInputBox().Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void LastNameInputBoxTest()
+        {
+            /// Test set up 
+            using var driver = GetWebDriver();
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
+
+            /// Begin Check
+            signUpPage.HasLastNameInputBox().Should().BeTrue();
         }
 
         [TestMethod]
@@ -26,32 +65,35 @@ namespace DigitalLeaf.tests.TestClasses
         {
             /// Test set up 
             using var driver = GetWebDriver();
-            LoginPage loginPage = new LoginPage(driver, "http://127.0.0.1:5500/public/views/login.html");
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
 
             /// Begin Check
-            loginPage.HasPasswordInputBox().Should().BeTrue();
+            signUpPage.HasPasswordInputBox().Should().BeTrue();
         }
 
         [TestMethod]
-        public void LogInButtonTest()
+        public void ConfirmPasswordInputBoxTest()
         {
             /// Test set up 
             using var driver = GetWebDriver();
-            LoginPage loginPage = new LoginPage(driver, "http://127.0.0.1:5500/public/views/login.html");
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
 
             /// Begin Check
-            loginPage.HasLogInButton().Should().BeTrue();
+            signUpPage.HasConfirmPasswordInputBox().Should().BeTrue();
         }
 
         [TestMethod]
-        public void ForgotPasswordLinkTest()
+        public void CreateAccountButtonTest()
         {
             /// Test set up 
             using var driver = GetWebDriver();
-            LoginPage loginPage = new LoginPage(driver, "http://127.0.0.1:5500/public/views/login.html");
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
 
             /// Begin Check
-            loginPage.HasForgotPasswordLink().Should().BeTrue();
+            signUpPage.HasCreateAccountButton().Should().BeTrue();
         }
 
         [TestMethod]
@@ -59,10 +101,11 @@ namespace DigitalLeaf.tests.TestClasses
         {
             /// Test set up 
             using var driver = GetWebDriver();
-            LoginPage loginPage = new LoginPage(driver, "http://127.0.0.1:5500/public/views/login.html");
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
 
             /// Begin Check
-            loginPage.HasForgotPasswordLink().Should().BeTrue();
+            signUpPage.HasLogInLink().Should().BeTrue();
         }
     }
 }

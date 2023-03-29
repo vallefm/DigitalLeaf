@@ -1,3 +1,4 @@
+using DigitalLeaf.tests.Entities;
 using DigitalLeaf.tests.WebDriver;
 using OpenQA.Selenium;
 
@@ -14,13 +15,22 @@ namespace DigitalLeaf.tests.PageObjects
         private static readonly By forgotYourPasswordLink = By.XPath("//a[contains(text(), 'Forgot your password')]");
         private static readonly By signUpLink = By.XPath("//a[contains(text(),'Sign up')]");
         private static readonly By logInButton = By.XPath("//button[contains(text(),'Log In')]");
-        
+        private static readonly By logInButton2 = By.XPath("//form//button[contains(text(),'Log In')]");
+
         /// <summary>
         /// Login Page constructor 
         /// <summary>
         public LoginPage(IWebDriver driver, string url) : base(driver)
         {
             Driver.Navigate().GoToUrl(url);
+            Driver.WaitForElement(emailInputBox);
+        }
+
+        /// <summary>
+        /// Login Page constructor (no URL)
+        /// <summary>
+        public LoginPage(IWebDriver driver) : base(driver)
+        {
             Driver.WaitForElement(emailInputBox);
         }
         
@@ -31,6 +41,17 @@ namespace DigitalLeaf.tests.PageObjects
         {
             Driver.FindElement(signUpLink).Click();
             return new SignUpPage(Driver);
+        }
+
+        /// <summary>
+        /// Logs into the User passed through the parameter.
+        /// <summary>
+        public HomePage LogIn(User user)
+        {
+            Driver.FindElement(emailInputBox).SendKeys(user.Email);
+            Driver.FindElement(passwordInputBox).SendKeys(user.Password);
+            Driver.FindElement(logInButton2).Click();
+            return new HomePage(Driver);
         }
 
         /// <summary>
