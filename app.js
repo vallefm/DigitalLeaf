@@ -11,7 +11,7 @@ import { signupRouter } from "./routes/signup.js";
 import { forgotPasswordRouter } from "./routes/forgot_Password.js";
 import { userRouter } from "./routes/user.js";
 import { projectRouter } from "./routes/project.js"
-import { teamRouter } from "./routes/team.js";
+import { searchRouter } from "./routes/search.js";
 import { scheduleRouter } from "./routes/schedule.js";
 import { inboxRouter } from "./routes/inbox.js";
 
@@ -43,7 +43,7 @@ app.use("/login", loginRouter)
 app.use("/signup", signupRouter)
 app.use("/forgotPassword", forgotPasswordRouter)
 app.use("/:firstName", userRouter)
-app.use("/team", teamRouter)
+app.use("/search", searchRouter)
 app.use("/project/", projectRouter)
 app.use("/schedule", scheduleRouter)
 app.use("/inbox", inboxRouter)

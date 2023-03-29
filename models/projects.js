@@ -207,6 +207,23 @@ async function deleteTask(taskId) {
   }
 }
 
+//Add Team Member
+
+async function addProjectMember(projectId, userId) {
+    try {
+      await conn.query(
+        "INSERT INTO projects_users VALUES (?, ?)",
+        [projectId, userId]
+        );
+      return true;
+    } catch (error) {
+      console.log (error)
+      return false;
+    }
+}
+
+
+
 /**  generic random number generator up to 9-digits for id creation. Prepend relevant 3-letter tag to create complete id.
  * users: usr
  * teams: tem
@@ -235,5 +252,6 @@ export {
   getTask,
   deleteTask,
   getUpdate,
-  deleteUpdate
+  deleteUpdate,
+  addProjectMember
 };
