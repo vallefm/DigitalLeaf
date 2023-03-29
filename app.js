@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import bcrypt from "bcryptjs";
 import session from "express-session";
 
+
 //Router imports
 import { loginRouter } from "./routes/login.js";
 import { logoutRouter } from "./routes/logout.js";

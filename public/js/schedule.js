@@ -3,7 +3,9 @@
 // import { fileURLToPath } from "url";
 //import { createSchedule } from "../../models/schedule";
 
-// import {createSchedule} from "../../models/schedule"
+//import {createSchedule} from "../../models/schedule"
+
+//import createSchedule  from "../../models/schedule"
 
 // const router = express.Router();
 // const __filename = fileURLToPath(import.meta.url);
@@ -19,8 +21,9 @@
 //   }
 // })
 
-// const modal = require('../../models/schedule.js');
 
+
+//const schedule = require('../../models/schedule');
 
 const calendar = document.querySelector(".calendar"),
   date = document.querySelector(".date"),
@@ -387,6 +390,7 @@ addEventSubmit.addEventListener("click", () => {
   console.log(newEvent);
   console.log(activeDay);
   let eventAdded = false;
+
   if (eventsArr.length > 0) {
     eventsArr.forEach((item) => {
       if (
@@ -401,7 +405,7 @@ addEventSubmit.addEventListener("click", () => {
   }
 
   if (!eventAdded) {
- modal.createSchedule("usr4337041", eventTitle, timeFrom, timeTo, activeDay, month+1, year);
+ //createSchedule("usr4337041", eventTitle, timeFrom, timeTo, activeDay, month+1, year);
     eventsArr.push({
       day: activeDay,
       month: month + 1,
