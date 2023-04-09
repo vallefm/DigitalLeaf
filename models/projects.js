@@ -196,6 +196,17 @@ async function checkTaskIdExists(taskId) {
   return false;
 }
 
+async function setTaskStatus(taskId, status) {
+  if (checkTaskIdExists(taskId)) {
+    try {
+      await conn.query("UPDATE tasks SET status = ? WHERE id = ? limit 1", [status, taskId]);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+}
+
 async function deleteTask(taskId) {
   if (checkTaskIdExists(taskId)) {
     try {
@@ -250,6 +261,7 @@ export {
   getProjectTasks,
   createTask,
   getTask,
+  setTaskStatus,
   deleteTask,
   getUpdate,
   deleteUpdate,
