@@ -71,14 +71,14 @@
           <button type="button" class="btn btn-success" data-bs-dismiss="modal">
             Cancel
           </button>
-          <a
+          <a 
             <%if (user.id == project.creator_id) {%>
               href="/project/<%- project.id %>/delete"
             <% } else { %>
-              href="/project/<%- project.id %>"
+              href="/project/<%- project.id %>" 
               <% } %>
             class="btn btn-outline-danger">
-            Yes, delete this project forever.
+              Yes, delete this project forever.
             </a>
         </div>
       </div>
@@ -97,9 +97,24 @@
         <p><%- task.details %></p>
       </div>
     </div>
+    <div class="mt-auto mx-auto w-100 px-2 gap-2 d-flex">
+      <% if (task.status == 'new' || task.status == 'complete') {%>
+      <form action="/project/<%- project.id %>/tasks/<%- task.id %>/start" class="w-100">
+        <button type="submit" class="btn btn-success w-100">Mark In Progress</button>
+      </form>
+      <% } else if (task.status == 'in progress') {%> 
+        
+      <form action="/project/<%- project.id %>/tasks/<%- task.id %>/reset" class="w-100">
+        <button type="submit" class="btn btn-secondary w-100">Mark New</button>
+      </form>
+      <form action="/project/<%- project.id %>/tasks/<%- task.id %>/complete" class="w-100">
+        <button type="submit" class="btn btn-success w-100">Mark Complete</button>
+      </form>
+         <% } %>
+    </div>
     <button
     type="button"
-    class="btn btn-dark rounded-0 mt-auto"
+    class="btn btn-dark rounded-0"
     data-bs-toggle="modal"
     data-bs-target="#projectSettingsModal"
   >
@@ -148,7 +163,7 @@
   </div>
     <a href="/project/<%- project.id %>/tasks">
       <button type="button" class="btn btn-dark rounded-0 w-100">
-        Close Task
+        Close
       </button>
     </a>
   </div>

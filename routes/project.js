@@ -11,7 +11,8 @@ import {
   getProjectTasks,
   createTask,
   getTask,
-  deleteTask
+  deleteTask,
+  setTaskStatus
 } from "../models/projects.js";
 
 const router = express.Router();
@@ -106,6 +107,31 @@ router.get("/:id/tasks/:taskid", async (req, res) => {
     task,
     context: 'task'
   });
+});
+
+
+router.get("/:id/tasks/:taskid/start", async (req, res) => {
+  if (await setTaskStatus(req.params.taskid, 'in progress')) {
+    res.status(201).redirect(`/project/${req.params.id}/tasks`);
+  } else {
+    res.status(401).redirect(`/project/${req.params.id}/tasks`);
+  }
+});
+
+router.get("/:id/tasks/:taskid/reset", async (req, res) => {
+  if (await setTaskStatus(req.params.taskid, 'new')) {
+    res.status(201).redirect(`/project/${req.params.id}/tasks`);
+  } else {
+    res.status(401).redirect(`/project/${req.params.id}/tasks`);
+  }
+});
+
+router.get("/:id/tasks/:taskid/complete", async (req, res) => {
+  if (await setTaskStatus(req.params.taskid, 'complete')) {
+    res.status(201).redirect(`/project/${req.params.id}/tasks`);
+  } else {
+    res.status(401).redirect(`/project/${req.params.id}/tasks`);
+  }
 });
 
 //delete task
