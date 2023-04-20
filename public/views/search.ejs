@@ -10,14 +10,14 @@
         <main class="d-flex flex-grow-1 bg-body-secondary overflow-hidden">
             <%- include('../components/sidebar.ejs') %>
             <div class="container mt-5 content overflow-y-auto overflow-x-hidden">
-              <%- include('../components/actionbar.ejs', {firstName, context: 'user', page: 'team'}) %>
+              <%- include('../components/actionbar.ejs', {context: 'project', page: 'search', project}) %>
 
                 <div class="d-flex justify-content-between">
                     <h3>Search for Team Members</h3>
                     <br/>
                     <p>Search for users by their Email</p>
                     <br/>
-                    <form action="/search/<%-projectId%>/searchUsers" method="post">
+                    <form action="/search/<%-project.id%>/searchUsers" method="post">
                         <label for="searchUser">Enter Search Here:</label>
                         <input type="search" id="searchUser" name="searchUser">
                         <button type="submit" class="btn btn-primary">Search</button>
@@ -28,7 +28,7 @@
                 <div class="d-flex gap-4 py-2 mb-4 content overflow-x-auto">
                     <% if (locals.searchUsers) {
                     for (let user of searchUsers ) { {%> <%-
-                        include('../components/teams/search_card.ejs', {user}) %> <% }} } %>
+                        include('../components/teams/search_card.ejs', {project, user}) %> <% }} } %>
                 </div>
 
 
