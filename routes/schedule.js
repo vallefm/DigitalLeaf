@@ -24,7 +24,7 @@ router.post('/addEvent', async (req, res) => {
 
 router.post('/getEvents', async (req, res) => {
   const user = req.session.user;
-console.log("getEvents fireed")
+//console.log("getEvents fireed")
   try {
     let { year, month, day} = req.body
     const events = await getEvents(user, year, month, day); // call a function to get events from the database

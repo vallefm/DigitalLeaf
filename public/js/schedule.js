@@ -499,7 +499,7 @@ function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventsArr));
 }
 
-//function to get events from local storage
+//function to get events from database
 async function getEvents(year, month, day) {
   const response = await fetch('/schedule/getEvents',{
     method: 'POST',
@@ -553,7 +553,7 @@ async function getEvents(year, month, day) {
 }
 
 
-//function to get events from local storage
+//function to check has  events 
 async function hasEvents(year, month, day) {
   const response = await fetch('/schedule/getEvents',{
     method: 'POST',
