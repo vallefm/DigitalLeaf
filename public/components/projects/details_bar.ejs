@@ -3,8 +3,8 @@
 <% if (context == 'project') {%>
 <div class="col-2 bg-dark d-flex flex-column pb-2">
   <div class="d-flex w-100 mb-3">
-    <button class="btn btn-dark rounded-0 w-50 text-leaf-green">Project</button>
-    <button class="btn btn-dark rounded-0 w-50">Members</button>
+    <a href="/project/<%- project.id %>" class="w-50"><button class="btn btn-dark rounded-0 w-100 text-leaf-green">Project</button></a>
+    <a href="/project/<%- project.id %>/members" class="w-50"><button class="btn btn-dark rounded-0 w-100">Members</button></a>
   </div>
   <div class="card border-0 mx-auto">
     <div class="card-body bg-dark text-light">
@@ -99,7 +99,7 @@
         <p>Subtasks</p>
         <p class="d-flex flex-column">
           <% for (let subtask of subtasks) {  %> 
-          <p>- <%- subtask.name %></p>
+          <%- include('./subtask.ejs', {subtask}) %>
           <% } %>
         </p>
         <button class="btn btn-sm btn-outline-light" 
@@ -213,4 +213,16 @@
     </div>
   </div>
 </div>
+<% } else if (context == 'members') {%>
+    <div class="col-2 bg-dark d-flex flex-column pb-2 text-light">
+      <div class="d-flex w-100 mb-3">
+        <a href="/project/<%- project.id %>" class="w-50"><button class="btn btn-dark rounded-0 w-100 text-leaf-green">Project</button></a>
+        <a href="/project/<%- project.id %>/members" class="w-50"><button class="btn btn-dark rounded-0 w-100">Members</button></a>
+      </div>
+      <% for (let member of members) {  %> 
+        <p class="mx-auto py-1"><%- member.user_id %></p>
+        <% } %>
+  
+    
+    </div>
 <% } %>

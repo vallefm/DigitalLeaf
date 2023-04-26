@@ -203,6 +203,7 @@ async function deleteTask(taskId) {
             await conn.query('delete FROM tasks WHERE id = ? limit 1', [taskId])
             return true
         } catch (error) {
+            console.log(error);
             return false
         }
     }
@@ -256,6 +257,15 @@ async function addProjectMember(projectId, userId) {
     }
 }
 
+async function getProjectMembers(projectId) {
+    try {
+        let [result] = await conn.query('SELECT * FROM projects_users WHERE project_id = ?', [projectId])
+        return result
+    } catch (error) {
+        return false
+    }
+}
+
 /**  generic random number generator up to 9-digits for id creation. Prepend relevant 3-letter tag to create complete id.
  * users: usr
  * teams: tem
@@ -287,6 +297,7 @@ export {
     getUpdate,
     deleteUpdate,
     addProjectMember,
+    getProjectMembers,
     addSubtask,
     getSubtasks,
 }

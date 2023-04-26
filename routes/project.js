@@ -15,6 +15,7 @@ import {
     setTaskStatus,
     addSubtask,
     getSubtasks,
+    getProjectMembers,
 } from '../models/projects.js'
 import { log } from 'console'
 
@@ -26,6 +27,7 @@ const __dirname = path.dirname(__filename)
 router.get('/:id', async (req, res) => {
     let [project] = await getProjectDetails(req.params.id)
     let updates = await getProjectUpdates(req.params.id)
+    let members = await getProjectMembers(req.params.id)
     let user = req.session.user
     res.render(path.join(__dirname + '/../public/views/project'), {
         loggedIn: req.session.loggedIn,
@@ -33,6 +35,7 @@ router.get('/:id', async (req, res) => {
         user,
         project,
         updates,
+        members,
         context: 'project',
     })
 })
@@ -72,6 +75,22 @@ router.get('/:id/update/:updateId/delete', async (req, res) => {
     } else {
         res.status(401).redirect(`/project/${req.params.id}`)
     }
+})
+
+router.get('/:id/members', async (req, res) => {
+    let [project] = await getProjectDetails(req.params.id)
+    let updates = await getProjectUpdates(req.params.id)
+    let members = await getProjectMembers(req.params.id)
+    let user = req.session.user
+    res.render(path.join(__dirname + '/../public/views/project'), {
+        loggedIn: req.session.loggedIn,
+        firstName: req.session.user.firstName,
+        user,
+        project,
+        updates,
+        members,
+        context: 'members',
+    })
 })
 
 // Tasks
