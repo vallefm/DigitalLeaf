@@ -45,7 +45,7 @@ const calendar = document.querySelector(".calendar"),
   addEventSubmit = document.querySelector(".add-event-btn ");
 
 let today = new Date();
-let activeDay;
+let activeDay ;
 let month = today.getMonth();
 let year = today.getFullYear();
 
@@ -83,11 +83,11 @@ const months = [
 // ];
 
 const eventsArr = [];
-getEvents();
+
 console.log(eventsArr);
 
 //function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
-function initCalendar() {
+async function initCalendar() {
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
   const prevLastDay = new Date(year, month, 0);
@@ -107,15 +107,18 @@ function initCalendar() {
   for (let i = 1; i <= lastDate; i++) {
     //check if event is present on that day
     let event = false;
-    eventsArr.forEach((eventObj) => {
-      if (
-        eventObj.day === i &&
-        eventObj.month === month + 1 &&
-        eventObj.year === year
-      ) {
-        event = true;
-      }
-    });
+    // eventsArr.forEach((eventObj) => {
+
+    //   if (
+    //     eventObj.day === i &&
+    //     eventObj.month === month + 1 &&
+    //     eventObj.year === year
+    //   ) {
+    //     event = true;
+    //   }
+    // });
+event =  await hasEvents(year, month, i )
+
     if (
       i === new Date().getDate() &&
       year === new Date().getFullYear() &&
@@ -143,6 +146,7 @@ function initCalendar() {
   }
   daysContainer.innerHTML = days;
   addListner();
+  getEvents(year, month, activeDay);
 }
 
 //function to add month and year on prev and next button
@@ -177,6 +181,7 @@ function addListner() {
       getActiveDay(e.target.innerHTML);
       updateEvents(Number(e.target.innerHTML));
       activeDay = Number(e.target.innerHTML);
+      getEvents(year, month, activeDay)
       //remove active
       days.forEach((day) => {
         day.classList.remove("active");
@@ -336,8 +341,8 @@ addEventTo.addEventListener("input", (e) => {
   }
 });
 
-//function to add event to eventsArr
-addEventSubmit.addEventListener("click", () => {
+addEventSubmit.addEventListener("click", async () => {
+  console.log("clicked success");
   const eventTitle = addEventTitle.value;
   const eventTimeFrom = addEventFrom.value;
   const eventTimeTo = addEventTo.value;
@@ -405,7 +410,6 @@ addEventSubmit.addEventListener("click", () => {
   }
 
   if (!eventAdded) {
- //createSchedule("usr4337041", eventTitle, timeFrom, timeTo, activeDay, month+1, year);
     eventsArr.push({
       day: activeDay,
       month: month + 1,
@@ -415,6 +419,36 @@ addEventSubmit.addEventListener("click", () => {
   }
 
   console.log(eventsArr);
+
+  try {
+    const response = await fetch('/schedule/addEvent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        eventTitle: eventTitle,
+        timeFrom: timeFrom,
+        timeTo: timeTo,
+        activeDay: activeDay,
+        month: month+1,
+        year: year
+      })
+    });
+
+    const data = await response.json();
+    console.log(data);
+    console.log("posted");
+
+    if (data.success) {
+      console.log("Event added successfully");
+    } else {
+      console.log("Failed to add event");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
   addEventWrapper.classList.remove("active");
   addEventTitle.value = "";
   addEventFrom.value = "";
@@ -426,6 +460,7 @@ addEventSubmit.addEventListener("click", () => {
     activeDayEl.classList.add("event");
   }
 });
+
 
 //function to delete event when clicked on event
 eventsContainer.addEventListener("click", (e) => {
@@ -464,14 +499,98 @@ function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventsArr));
 }
 
-//function to get events from local storage
-function getEvents() {
-  //check if events are already saved in local storage then return event else nothing
-  if (localStorage.getItem("events") === null) {
-    return;
+//function to get events from database
+async function getEvents(year, month, day) {
+  const response = await fetch('/schedule/getEvents',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+    
+      day: day,
+      month: month+1,
+      year: year
+    })
+  });
+
+  if (response.ok) {
+    while(eventsArr.length > 0){
+      eventsArr.pop()
+    }
+
+    const events = await response.json();
+    //eventsArr = [];
+    console.log(events);
+
+    for(let i = 0; i < events.length; i++){
+
+      const newEvent = {
+        title: events[i].event_name,
+        time: events[i].event_time_from + " - " + events[i].event_time_to,
+      };
+
+      eventsArr.push({
+        day: events[i].event_day,
+        month: events[i].event_month,
+        year: events[i].event_year,
+        events: [newEvent],
+      });
+
+    }
+
+    console.log(eventsArr);
+    updateEvents(activeDay);
+
+  
+   
+  } else {
+    console.error('Failed to fetch events:', response.status);
+
+
+ 
   }
-  eventsArr.push(...JSON.parse(localStorage.getItem("events")));
 }
+
+
+//function to check has  events 
+async function hasEvents(year, month, day) {
+  const response = await fetch('/schedule/getEvents',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+    
+      day: day,
+      month: month+1,
+      year: year
+    })
+  });
+
+  if (response.ok) {
+
+    const events = await response.json();
+    //eventsArr = [];
+    console.log(events.length)
+
+   if (events.length > 0){
+     return true
+   } else{
+     return false
+   }
+
+  
+   
+  } else {
+   return false
+
+
+ 
+  }
+}
+
+
 
 function convertTime(time) {
   //convert time to 24 hour format

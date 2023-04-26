@@ -631,13 +631,14 @@
               <div class="title">Add Event</div>
               <i class="fas fa-times close"></i>
             </div>
-            <form class="add-event-body" method="post" action="/schedule/addEvent">
+            <form class="add-event-body" >
               <div class="add-event-input">
                 <input
                   type="text"
                   name="eventName"
                   placeholder="Event Name"
                   class="event-name"
+                  id="event-name"
                 />
               </div>
               <div class="add-event-input">
@@ -645,6 +646,7 @@
                   type="text"
                   placeholder="Event Time From"
                   class="event-time-from"
+                  id="event-time-form"
                 />
               </div>
               <div class="add-event-input">
@@ -652,12 +654,14 @@
                   type="text"
                   placeholder="Event Time To"
                   class="event-time-to"
+                  id="even-time-to"
                 />
               </div>
+              <div class="add-event-footer">
+                <button class="add-event-btn">Add Event</button>
+              </div>
             </form>
-            <div class="add-event-footer">
-              <button class="add-event-btn">Add Event</button>
-            </div>
+          
           </div>
         </div>
         <button class="add-event">

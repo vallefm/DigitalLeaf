@@ -71,14 +71,14 @@
           <button type="button" class="btn btn-success" data-bs-dismiss="modal">
             Cancel
           </button>
-          <a
+          <a 
             <%if (user.id == project.creator_id) {%>
               href="/project/<%- project.id %>/delete"
             <% } else { %>
-              href="/project/<%- project.id %>"
+              href="/project/<%- project.id %>" 
               <% } %>
             class="btn btn-outline-danger">
-            Yes, delete this project forever.
+              Yes, delete this project forever.
             </a>
         </div>
       </div>
@@ -91,15 +91,46 @@
       <button class="btn btn-dark rounded-0 w-50 text-leaf-green">Task</button>
       <button class="btn btn-dark rounded-0 w-50">Assigned</button>
     </div>
-    <div class="card border-0 mx-auto">
-      <div class="card-body bg-dark text-light">
+    <div class="card border-0 bg-transparent px-4 text-light">
+      <div class="card-body bg-dark text-light mx-auto">
         <h2><%- task.name %></h2>
+      </div>
+      <div>
+        <p>Details</p>
         <p><%- task.details %></p>
       </div>
+      <div>
+        <p>Subtasks</p>
+        <p class="d-flex flex-column">
+          <% for (let subtask of subtasks) {  %> 
+          <p>- <%- subtask.name %></p>
+          <% } %>
+        </p>
+        <button class="btn btn-sm btn-outline-light" 
+        data-bs-toggle="modal"
+        data-bs-target="#addSubtaskModal">
+        add subtask
+      </button>
+      </div>
+    </div>
+    <div class="mt-auto mx-auto w-100 px-2 gap-2 d-flex">
+      <% if (task.status == 'new' || task.status == 'complete') {%>
+      <form action="/project/<%- project.id %>/tasks/<%- task.id %>/start" class="w-100">
+        <button type="submit" class="btn btn-success w-100">Mark In Progress</button>
+      </form>
+      <% } else if (task.status == 'in progress') {%> 
+        
+      <form action="/project/<%- project.id %>/tasks/<%- task.id %>/reset" class="w-100">
+        <button type="submit" class="btn btn-secondary w-100">Mark New</button>
+      </form>
+      <form action="/project/<%- project.id %>/tasks/<%- task.id %>/complete" class="w-100">
+        <button type="submit" class="btn btn-success w-100">Mark Complete</button>
+      </form>
+         <% } %>
     </div>
     <button
     type="button"
-    class="btn btn-dark rounded-0 mt-auto"
+    class="btn btn-dark rounded-0"
     data-bs-toggle="modal"
     data-bs-target="#projectSettingsModal"
   >
@@ -148,8 +179,42 @@
   </div>
     <a href="/project/<%- project.id %>/tasks">
       <button type="button" class="btn btn-dark rounded-0 w-100">
-        Close Task
+        Close
       </button>
     </a>
   </div>
+
+  <!-- Subtask Modal -->
+  <div
+  class="modal fade"
+  id="addSubtaskModal"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="addSubtaskModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addSubtaskModalLabel">
+          Subtask
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/project/<%- project.id %>/tasks/<%- task.id %>/subtasks" method="post">
+        <div class="modal-body d-flex flex-column gap-2">
+            <input type="text" name="subtask" id="subtask" placeholder="Enter subtask here..." class="form-control" maxlength="50" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-success">
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 <% } %>
