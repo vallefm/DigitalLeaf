@@ -17,3 +17,14 @@ bld/
 [Ll]og/
 [Ll]ogs/
 node_modules
+node_modules/.bin/commitlint.ps1
+node_modules/.bin/conventional-commits-parser.ps1
+node_modules/.bin/ejs.ps1
+node_modules/.bin/git-raw-commits.ps1
+node_modules/.bin/jake.ps1
+node_modules/.bin/JSONStream.ps1
+node_modules/.bin/mime.ps1
+node_modules/.bin/resolve.ps1
+node_modules/.bin/semver.ps1
+node_modules/normalize-package-data/node_modules/.bin/semver.ps1
+node_modules/read-pkg/node_modules/.bin/semver.ps1

@@ -10,7 +10,6 @@ namespace DigitalLeaf.tests.TestClasses
     {
         public string TestFilesPath;
         protected IWebDriver Driver;
-        protected internal ScreenshotTaker ScreenshotTaker;
 
         public TestContext TestContext {get; set; }
         
@@ -21,9 +20,7 @@ namespace DigitalLeaf.tests.TestClasses
             options.AddArgument("--start-maximized");
             
             Driver = new ChromeDriver(Environment.CurrentDirectory, options);
-            ScreenshotTaker = ScreenshotTaker.Initalize(TestContext, Driver);
             TestFilesPath = Environment.CurrentDirectory + "\\TestDocs\\";
-            ScreenshotTaker = ScreenshotTaker.Initalize(TestContext, Driver);
             return Driver;
         }
 
@@ -33,20 +30,8 @@ namespace DigitalLeaf.tests.TestClasses
         [TestCleanup]
         public void DigitalLeafTestCleanup()
         {
-            try
-            {
-                /// Takes and saves a screenshot if we hit a failed test
-                // if(TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
-                // {
-                //     ScreenshotTaker.TakeScreenshot();
-                // }
-            }
-            finally
-            {
-                Driver.Quit();
-                Thread.Sleep(3000); //wait for any browser error to appear(ex. Plugin Container has stopped working)
-                ScreenshotTaker.Reset();
-            }
+            Driver.Quit();
+            Thread.Sleep(3000); //wait for any browser error to appear(ex. Plugin Container has stopped working)
         }
     }
 }

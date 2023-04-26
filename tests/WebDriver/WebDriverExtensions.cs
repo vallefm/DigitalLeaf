@@ -65,29 +65,6 @@ namespace DigitalLeaf.tests.WebDriver
         }
 
         /// <summary>
-        /// Checks if an element is displayed on the page
-        /// </summary>
-        /// <param name="driver">IWebDriver object</param>
-        /// <param name="by">By locator to use</param>
-        /// <param name="timeoutInSeconds">Time in seconds to wait before timeout</param>
-        /// <returns>true if element is displayed, false if not</returns>
-        public static bool IsElementDisplayed(this IWebDriver driver, By by, int timeoutInSeconds = 10)
-        {
-            // Wait for element to be displayed
-            try
-            {
-                new WebDriverWait(driver, new TimeSpan(0, 0, timeoutInSeconds)).Until(
-                    d => d.FindElement(by).Displayed);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-
-        /// <summary>
         /// Waits for an element to no longer be displayed on the page. Typically used for Ajax elements
         /// </summary>
         /// <param name="driver">IWebDriver</param>
@@ -102,65 +79,6 @@ namespace DigitalLeaf.tests.WebDriver
                 new WebDriverWait(driver, new TimeSpan(0, 0, timeoutInSeconds)).Until(
                     d => d.FindElement(by).Displayed == false);
             }
-        }
-
-        /// <summary>
-        /// Selects the option corresponding to the specified text from the specified Select List
-        /// </summary>
-        /// <param name="driver">IWebDriver object</param>
-        /// <param name="by">how to find the element</param>
-        /// <param name="textToSelect">the item to click from the select element</param>
-        public static void SelectElementInListByText(this IWebDriver driver, By by, string textToSelect)
-        {
-            //finds the Select List element to manipulate
-            IWebElement selectElement = driver.FindElement(by);
-
-            //instantiates the SelectElement with the located IWebElement
-            SelectElement select = new SelectElement(selectElement);
-
-            //Selects the specified text from the list
-            select.SelectByText(textToSelect);
-
-        }
-
-        /// <summary>
-        /// Selects the option corresponding to the specified index from the specified Select List
-        /// </summary>
-        /// <param name="driver">IWebDriver object</param>
-        /// <param name="by">how to find the element</param>
-        /// <param name="indexToSelect">the item to click from the select element</param>
-        /// <returns>string of option that was selected</returns>
-        public static string SelectElementInListByIndex(this IWebDriver driver, By by, int indexToSelect)
-        {
-            //finds the Select List element to manipulate
-            IWebElement selectElement = driver.FindElement(by);
-
-            //instantiates the SelectElement with the located IWebElement
-            SelectElement select = new SelectElement(selectElement);
-
-            //Selects the specified index from the list
-            select.SelectByIndex(indexToSelect);
-
-            //return string value of option that was selected
-            return select.Options[indexToSelect].Text;
-        }
-
-        /// <summary>
-        /// Selects the option corresponding to the specified value from the specified Select List
-        /// </summary>
-        /// <param name="driver">IWebDriver object</param>
-        /// <param name="by">how to find the element</param>
-        /// <param name="valueToSelect">the item to click from the select element</param>
-        public static void SelectElementInListByValue(this IWebDriver driver, By by, string valueToSelect)
-        {
-            //finds the Select List element to manipulate
-            IWebElement selectElement = driver.FindElement(by);
-
-            //instantiates the SelectElement with the located IWebElement
-            SelectElement select = new SelectElement(selectElement);
-
-            //Selects the specified value from the list
-            select.SelectByValue(valueToSelect);
         }
 
         /// <summary>
@@ -236,58 +154,6 @@ namespace DigitalLeaf.tests.WebDriver
         }
 
         /// <summary>
-        /// WaitForTextInElement will wait the specified number of seconds (default is 10) for an element to contain the specified text
-        /// </summary>
-        /// <param name="driver">IWebDriver object</param>
-        /// <param name="by">how to find the element</param>
-        /// <param name="text">Text expected inside the element</param>
-        /// <param name="timeoutInSeconds">time to wait in seconds</param>
-        /// <returns>The element if it is found</returns>
-        public static IWebElement WaitForTextInElement(this IWebDriver driver, By by, string text, int timeoutInSeconds = 30)
-        {
-            if (timeoutInSeconds > 0)
-            {
-                new WebDriverWait(driver, new TimeSpan(0, 0, timeoutInSeconds)).Until(
-                    d => d.FindElement(by).Text.Contains(text));
-            }
-            return driver.FindElement(by);
-        }
-
-        /// <summary>
-        /// Verifies a check box's state and then checks or unchecks it according to the 'check' parameter
-        /// </summary>
-        /// <param name="driver">IWebDriver object to use, defaulted to current driver object</param>
-        /// <param name="locator">How to locate the check box. Ex: By.Id("checkBox5")</param>
-        /// <param name="check">Value of true will check the box, false will uncheck it.</param>
-        public static void SetCheckBox(this IWebDriver driver, By locator, bool check = true)
-        {
-            if ((check && !driver.FindElement(locator).Selected) || (!check && driver.FindElement(locator).Selected))
-                driver.FindElement(locator).Click();
-        }
-
-        /// <summary>
-        /// Verifies a check box's state and then checks or unchecks it according to the 'check' parameter
-        /// </summary>
-        /// <param name="driver">IWebDriver object to use, defaulted to current driver object</param>
-        /// <param name="element">Checkbox element</param>
-        /// <param name="check">Value of true will check the box, false will uncheck it.</param>
-        public static void SetCheckBox(this IWebDriver driver, IWebElement element, bool check = true)
-        {
-            if ((check && !element.Selected) || (!check && element.Selected))
-                element.Click();
-        }
-
-        /// <summary>
-        /// Allows access to an IJavaScriptExecutor object for this driver
-        /// </summary>
-        /// <param name="driver">the IWebDriver object</param>
-        /// <returns>the IJavaScriptExecutor</returns>
-        public static IJavaScriptExecutor Scripts(this IWebDriver driver)
-        {
-            return (IJavaScriptExecutor)driver;
-        }
-
-        /// <summary>
         /// Right click on an element to display the context menu
         /// </summary>
         /// <param name="driver">IWebDriver object</param>
@@ -315,31 +181,6 @@ namespace DigitalLeaf.tests.WebDriver
         public static void DoubleClick(this IWebDriver driver, By by)
         {
             new Actions(driver).DoubleClick(driver.WaitForElement(by)).Build().Perform();
-        }
-
-        /// <summary>
-        /// Waits for an element to become stale
-        /// </summary>
-        /// <param name="driver">IWebDriver object</param>
-        /// <param name="by">element that should go stale</param>
-        /// <param name="timeoutInSeconds">time to wait in seconds</param>
-        public static void WaitForElementToBecomeStale(this IWebDriver driver, IWebElement element, int timeoutInSeconds = 10)
-        {
-            new WebDriverWait(driver, new TimeSpan(0, 0, timeoutInSeconds)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.StalenessOf(element));
-        }
-
-        /// <summary>
-        /// Clicks an element and then waits for that element to become stale. Typically used when a page is reloading due to the click.
-        /// </summary>
-        /// <param name="driver">IWebDriver object</param>
-        /// <param name="by">element being clicked that will also go stale</param>
-        /// <param name="timeoutInSeconds">time to wait in seconds</param>
-        public static void ClickElementAndWaitForStale(this IWebDriver driver, By by, int timeoutInSeconds = 10)
-        {
-            // Need to find element first and keep the reference to it in a variable. Then we wait for that reference to go stale. We open to a race condition otherwise.
-            IWebElement element = driver.FindElement(by);
-            element.Click();
-            new WebDriverWait(driver, new TimeSpan(0, 0, timeoutInSeconds)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.StalenessOf(element));
         }
 
         /// <summary>
@@ -390,16 +231,7 @@ namespace DigitalLeaf.tests.WebDriver
         {
             new Actions(driver).MoveToElement(driver.WaitForElementDisplayed(by)).Build().Perform();
         }
-
-        /// <summary>
-        /// Moves to an element
-        /// </summary>
-        /// <param name="driver">IWebDriver object</param>
-        /// <param name="by">locator for element to hover over</param>
-        public static void MoveTo(this IWebDriver driver, By by)
-        {
-            new Actions(driver).MoveToElement(driver.WaitForElementDisplayed(by));
-        }
+        
         /// <summary>
         /// helpful method when needing to scroll to an element to be clicked, solidifies consistency.
         /// </summary>

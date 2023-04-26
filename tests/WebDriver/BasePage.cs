@@ -13,18 +13,12 @@ namespace DigitalLeaf.tests.WebDriver
         protected IWebDriver Driver;
 
         /// <summary>
-        /// A local reference to the ScreenshotTaker instance
-        /// </summary>
-        protected ScreenshotTaker ScreenshotTaker;
-
-        /// <summary>
         /// BasePage constructor that accepts the driver object
         /// </summary>
         /// <param name="driver">IWebDriver object</param>
         protected BasePage(IWebDriver driver)
         {
             Driver = driver;
-            ScreenshotTaker = ScreenshotTaker.Instance;
         }
     }
 }

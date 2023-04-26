@@ -14,6 +14,8 @@ namespace DigitalLeaf.tests.PageObjects
         private static readonly By passwordInputBox = By.XPath("//input[@id = 'password']");
         private static readonly By forgotYourPasswordLink = By.XPath("//a[contains(text(), 'Forgot your password')]");
         private static readonly By signUpLink = By.XPath("//a[contains(text(),'Sign up')]");
+        private static readonly By homeButton = By.XPath("//img[@class = 'logo-small']");
+
         private static readonly By logInButton = By.XPath("//button[contains(text(),'Log In')]");
         private static readonly By logInButton2 = By.XPath("//form//button[contains(text(),'Log In')]");
 
@@ -41,6 +43,15 @@ namespace DigitalLeaf.tests.PageObjects
         {
             Driver.FindElement(signUpLink).Click();
             return new SignUpPage(Driver);
+        }
+
+        /// <summary>
+        /// Navigates to the Sign Up page from the login page.
+        /// <summary>
+        public UnauthenticatedHomePage ClickHomeButton()
+        {
+            Driver.FindElement(homeButton).Click();
+            return new UnauthenticatedHomePage(Driver);
         }
 
         /// <summary>

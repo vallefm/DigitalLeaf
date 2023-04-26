@@ -14,6 +14,26 @@ namespace DigitalLeaf.tests.TestClasses
         static string baseUrl = "http://localhost:8080/login";
 
         [TestMethod]
+        public void CalendarPageUrlTest()
+        {
+            /// Test set up 
+            using var driver = GetWebDriver();
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
+
+            User user = new User("Test", "User");
+            loginPage = signUpPage.RegisterNewUser(user);
+
+            HomePage homePage = loginPage.LogIn(user);
+
+            CalendarPage calendarPage = homePage.ClickMySchedule();
+
+            /// Begin Check
+            driver.Url.Should().BeEquivalentTo("http://localhost:8080/schedule");
+        }
+
+        [TestMethod]
         public void WeekdaysTest()
         {
             /// Test set up 
