@@ -13,15 +13,22 @@ namespace DigitalLeaf.tests.TestClasses
     {
         static string baseUrl = "http://localhost:8080/login";
 
+        // Filled with sleeps to better demo test functionality
         [TestMethod]
         public void RegisterNewUserTest()
         {
+            // Create a user object to be used for account registration
+            User user = new User("Test", "User");
+
             /// Test set up 
             using var driver = GetWebDriver();
             LoginPage loginPage = new LoginPage(driver, baseUrl);
+            Thread.Sleep(3000);
+
             SignUpPage signUpPage = loginPage.ClickSignUpLink();
-            User user = new User("Test", "User");
+            Thread.Sleep(3000);
             loginPage = signUpPage.RegisterNewUser(user);
+
             HomePage homePage = loginPage.LogIn(user);
 
             /// Begin check

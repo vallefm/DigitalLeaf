@@ -13,6 +13,8 @@ namespace DigitalLeaf.tests.PageObjects
         private static readonly By HomeHeader = By.XPath("//h3[contains(text(), 'Home')]");
         private static readonly By FirstNameHeader = By.XPath("//p[contains(text(), 'Test')]");
         private static readonly By MyScheduleButton = By.XPath("//a[contains(text(), 'My Schedule')]");
+        private static readonly By ProjectsButton = By.XPath("//a[contains(text(), 'Projects')]");
+
         
         
         /// <summary>
@@ -24,12 +26,21 @@ namespace DigitalLeaf.tests.PageObjects
         }
 
         /// <summary>
-        /// Clicks into the Users My Schedule Page.
+        /// Clicks into the user's My Schedule Page.
         /// <summary>
         public CalendarPage ClickMySchedule()
         {
             Driver.FindElement(MyScheduleButton).Click();
             return new CalendarPage(Driver);
+        }
+
+        /// <summary>
+        /// Clicks into the user's Projects Page.
+        /// <summary>
+        public ProjectsPage ClickProjects()
+        {
+            Driver.FindElement(ProjectsButton).Click();
+            return new ProjectsPage(Driver);
         }
 
         /// <summary>

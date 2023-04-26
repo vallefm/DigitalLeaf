@@ -24,6 +24,23 @@ namespace DigitalLeaf.tests.PageObjects
         }
 
         /// <summary>
+        /// Unauthenticated Home Page constructor (no URL)
+        /// <summary>
+        public UnauthenticatedHomePage(IWebDriver driver) : base(driver)
+        {
+            Driver.WaitForElement(welcomeHeader);
+        }
+
+        /// <summary>
+        /// Clicks the Log In button to navigate to the Log In page 
+        /// <summary>
+        public LoginPage ClickLogInButton()
+        {
+            Driver.FindElement(logInButton).Click();
+            return new LoginPage(Driver);
+        }
+
+        /// <summary>
         /// Returns a boolean result depending on whether or not the current webpage contains the "Welcome" header
         /// </summary>
         public bool HasWelcomeHeader() => Driver.HasWebElement(welcomeHeader);

@@ -13,6 +13,18 @@ namespace DigitalLeaf.tests.TestClasses
         static string baseUrl = "http://localhost:8080/login";
         
         [TestMethod]
+        public void SignUpUrlTest()
+        {
+            /// Test set up 
+            using var driver = GetWebDriver();
+            LoginPage loginPage = new LoginPage(driver, baseUrl);
+            SignUpPage signUpPage = loginPage.ClickSignUpLink();
+
+            /// Begin Check
+            driver.Url.Should().BeEquivalentTo("http://localhost:8080/signup");
+        }
+        
+        [TestMethod]
         public void SignUpHeaderTest()
         {
             /// Test set up 
@@ -97,7 +109,7 @@ namespace DigitalLeaf.tests.TestClasses
         }
 
         [TestMethod]
-        public void SignUpLinkTest()
+        public void LoginButtonButtonTest()
         {
             /// Test set up 
             using var driver = GetWebDriver();
@@ -105,7 +117,7 @@ namespace DigitalLeaf.tests.TestClasses
             SignUpPage signUpPage = loginPage.ClickSignUpLink();
 
             /// Begin Check
-            signUpPage.HasLogInLink().Should().BeTrue();
+            signUpPage.HasLogInButton().Should().BeTrue();
         }
     }
 }

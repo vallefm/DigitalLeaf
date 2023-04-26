@@ -29,16 +29,23 @@ namespace DigitalLeaf.tests.PageObjects
         }
 
         /// <summary>
-        /// Completes Registration for a new user. 
+        /// Completes Registration for a new user.
+        /// Filled with Sleeps to better demo user registration.
         /// <summary>
         public LoginPage RegisterNewUser(User user)
         {
             Driver.FindElement(emailInputBox).SendKeys(user.Email);
+            Thread.Sleep(600);
             Driver.FindElement(firstNameInputBox).SendKeys(user.FirstName);
+            Thread.Sleep(600);
             Driver.FindElement(lastNameInputBox).SendKeys(user.LastName);
+            Thread.Sleep(600);
             Driver.FindElement(passwordInputBox).SendKeys(user.Password);
+            Thread.Sleep(600);
             Driver.FindElement(confirmPasswordInputBox).SendKeys(user.Password);
+            Thread.Sleep(2000);
             Driver.FindElement(createAccountButton).Click();
+            Thread.Sleep(2000);
             return new LoginPage(Driver);
         }
 
@@ -93,6 +100,6 @@ namespace DigitalLeaf.tests.PageObjects
         /// <summary>
         /// Returns a boolean result depending on whether or not the current webpage has the Log In Link
         /// </summary>
-        public bool HasLogInLink() => Driver.HasWebElement(LogInLink);
+        public bool HasLogInButton() => Driver.HasWebElement(LogInLink);
     }
 }

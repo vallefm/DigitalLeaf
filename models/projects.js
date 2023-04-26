@@ -156,7 +156,7 @@ async function createTask(title, details, dueDate, creatorId, projectId) {
     let newTaskId = createTaskId(taskPrefix)
     dueDate == '' ? (dueDate = null) : dueDate
     try {
-        await conn.query('INSERT INTO tasks VALUES (?, ?, ?, ?, ?, ?, ?, NOW())', [
+        await conn.query('INSERT INTO tasks VALUES (?, ?, ?, ?, ?, 0, ?, ?, NOW())', [
             newTaskId,
             title,
             dueDate,
