@@ -12,6 +12,8 @@ namespace DigitalLeaf.tests.PageObjects
     {
         private static readonly By HomeHeader = By.XPath("//h3[contains(text(), 'Home')]");
         private static readonly By FirstNameHeader = By.XPath("//p[contains(text(), 'Test')]");
+        private static readonly By MyScheduleButton = By.XPath("//a[contains(text(), 'My Schedule')]");
+        
         
         /// <summary>
         /// Home Page constructor 
@@ -19,6 +21,15 @@ namespace DigitalLeaf.tests.PageObjects
         public HomePage(IWebDriver driver) : base(driver)
         {
             Driver.WaitForElement(HomeHeader);
+        }
+
+        /// <summary>
+        /// Clicks into the Users My Schedule Page.
+        /// <summary>
+        public CalendarPage ClickMySchedule()
+        {
+            Driver.FindElement(MyScheduleButton).Click();
+            return new CalendarPage(Driver);
         }
 
         /// <summary>
