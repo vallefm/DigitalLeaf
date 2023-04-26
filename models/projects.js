@@ -45,7 +45,6 @@ async function createProject(projectName, description, dueDate, creatorId) {
         ])
         return true
     } catch (error) {
-        console.log(error)
         return false
     }
 }
@@ -105,7 +104,6 @@ async function createProjectUpdate(projectId, userId, header, content) {
         ])
         return true
     } catch (error) {
-        console.log(error)
         return false
     }
 }
@@ -156,7 +154,7 @@ async function createTask(title, details, dueDate, creatorId, projectId) {
     let newTaskId = createTaskId(taskPrefix)
     dueDate == '' ? (dueDate = null) : dueDate
     try {
-        await conn.query('INSERT INTO tasks VALUES (?, ?, ?, ?, ?, ?, ?, NOW())', [
+        await conn.query('INSERT INTO tasks VALUES (?, ?, ?, ?, ?, 0, ?, ?, NOW())', [
             newTaskId,
             title,
             dueDate,
@@ -167,7 +165,6 @@ async function createTask(title, details, dueDate, creatorId, projectId) {
         ])
         return true
     } catch (error) {
-        console.log(error)
         return false
     }
 }
@@ -231,6 +228,7 @@ async function getSubtasks(taskId) {
     }
 }
 
+
 function createSubtaskId(prefix) {
     let taskId = prefix + randomId()
     while (!checkSubtaskIdExists(taskId)) {
@@ -254,7 +252,6 @@ async function addProjectMember(projectId, userId) {
         await conn.query('INSERT INTO projects_users VALUES (?, ?)', [projectId, userId])
         return true
     } catch (error) {
-        console.log(error)
         return false
     }
 }

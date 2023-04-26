@@ -20,7 +20,7 @@ router.get('/projects', async (req, res) => {
 router.post('/projects/create', async (req, res) => {
     let {projectName, description, dueDate} = req.body
     if(await createProject(projectName, description, dueDate, req.session.user.id)){
-        res.status(201).redirect(`/${req.session.user.firstName}/home`)
+        res.status(201).redirect(`/${req.session.user.firstName}/projects`)
     } 
 })
 
